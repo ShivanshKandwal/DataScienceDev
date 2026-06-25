@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  font-family: var(--font-sans);
+  background-color: #080511; /* Deep dark space background */
+  color: #E2E8F0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080511;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Premium Glass Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Theme specific glass card glowing borders */
+.glass-eda {
+  background: rgba(16, 185, 129, 0.02) !important;
+  border: 1px solid rgba(16, 185, 129, 0.12) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), 0 0 20px -8px rgba(16, 185, 129, 0.15);
+}
+.glass-eda:hover {
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5), 0 0 25px -2px rgba(16, 185, 129, 0.25) !important;
+}
+
+.glass-ml {
+  background: rgba(99, 102, 241, 0.02) !important;
+  border: 1px solid rgba(99, 102, 241, 0.12) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), 0 0 20px -8px rgba(99, 102, 241, 0.15);
+}
+.glass-ml:hover {
+  border: 1px solid rgba(99, 102, 241, 0.35) !important;
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5), 0 0 25px -2px rgba(99, 102, 241, 0.25) !important;
+}
+
+.glass-ai {
+  background: rgba(244, 63, 94, 0.02) !important;
+  border: 1px solid rgba(244, 63, 94, 0.12) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), 0 0 20px -8px rgba(244, 63, 94, 0.15);
+}
+.glass-ai:hover {
+  border: 1px solid rgba(244, 63, 94, 0.35) !important;
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5), 0 0 25px -2px rgba(244, 63, 94, 0.25) !important;
+}
+
+/* Background animated glow blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  will-change: transform;
+  pointer-events: none;
+}
+
+@keyframes float-blob-1 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(70px, -90px) scale(1.15); }
+  66% { transform: translate(-40px, 50px) scale(0.9); }
+}
+@keyframes float-blob-2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(-90px, 70px) scale(1.1); }
+}
+@keyframes float-blob-3 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  40% { transform: translate(50px, 90px) scale(0.95); }
+}
+
+.blob-purple {
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, rgba(168, 85, 247, 0) 70%);
+  animation: float-blob-1 22s infinite ease-in-out;
+}
+.blob-indigo {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.45) 0%, rgba(99, 102, 241, 0) 70%);
+  animation: float-blob-2 25s infinite ease-in-out;
+}
+.blob-pink {
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.5) 0%, rgba(244, 63, 94, 0) 70%);
+  animation: float-blob-3 20s infinite ease-in-out;
+}
+.blob-cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(6, 182, 212, 0) 70%);
+  animation: float-blob-1 28s infinite ease-in-out;
+}
+
+/* Notebook styling overrides */
+.ipynb-cell-code {
+  background-color: rgba(9, 6, 18, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.ipynb-cell-output-stream {
+  background-color: rgba(4, 2, 8, 0.95) !important;
+  font-family: var(--font-mono) !important;
+  color: #10B981 !important; /* neon-green terminal */
+  border-left: 3px solid rgba(16, 185, 129, 0.5) !important;
+}
+
+.ipynb-cell-output-error {
+  background-color: rgba(24, 4, 10, 0.95) !important;
+  font-family: var(--font-mono) !important;
+  color: #F87171 !important; /* red traceback */
+  border-left: 3px solid rgba(239, 68, 68, 0.5) !important;
+}
+
+.ipynb-dataframe {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+.ipynb-dataframe th {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #F8FAFC;
+  padding: 6px 10px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+}
+.ipynb-dataframe td {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #94A3B8;
+}
+.ipynb-dataframe tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Glow spotlight */
+.cursor-glow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  width: 450px;
+  height: 450px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  filter: blur(80px);
+  opacity: 0.2;
+  transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Python Syntax Highlighting tokens */
+.py-keyword { color: #F43F5E; font-weight: 600; }
+.py-string { color: #10B981; }
+.py-number { color: #F59E0B; }
+.py-comment { color: #64748B; font-style: italic; }
+.py-builtin { color: #A855F7; }
+.py-def { color: #6366F1; font-weight: 500; }
+.py-decorator { color: #06B6D4; }
+.py-operator { color: #38BDF8; }
