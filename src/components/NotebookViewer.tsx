@@ -4,40 +4,64 @@ import Plotly from 'plotly.js-dist-min';
 
 // ANSI escape sequence remover
 const stripAnsi = (str: string) => {
+  /* eslint-disable-next-line no-control-regex */
   return str.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
 };
 
 // Python Syntax Highlighter (Light Mode optimized)
 const highlightPython = (code: string) => {
-  let highlighted = code
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt bridge;");
+  const escapeHtml = (text: string) => {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  };
 
-  // Keywords
-  const keywords = /\b(def|class|import|from|return|if|else|elif|for|while|try|except|finally|with|as|in|is|not|and|or|lambda|pass|break|continue|global|assert)\b/g;
-  highlighted = highlighted.replace(keywords, '<span class="py-keyword">$1</span>');
+  // Group 1: Comment
+  // Group 2: String
+  // Group 3: Keyword
+  // Group 4: Builtin
+  // Group 5: Decorator
+  // Group 6: Number
+  // Group 7: Operator
+  // Group 8: Identifier / word
+  // Group 9: Whitespace
+  // Group 10: Rest
+  const tokenRegex = /(#.*)|('(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")|(\b(?:def|class|import|from|return|if|else|elif|for|while|try|except|finally|with|as|in|is|not|and|or|lambda|pass|break|continue|global|assert)\b)|(\b(?:print|len|range|str|int|float|list|dict|set|tuple|enumerate|zip|sum|min|max|type|abs|round|open)\b)|(@\w+)|(\b\d+(?:\.\d+)?\b)|([+\-*/%=<>!&|^~]+)|(\w+)|(\s+)|(.)/g;
 
-  // Strings (single and double quotes)
-  highlighted = highlighted.replace(/(["'])(.*?)\1/g, '<span class="py-string">"$2"</span>');
-
-  // Comments
-  highlighted = highlighted.replace(/(#.*)/g, '<span class="py-comment">$1</span>');
-
-  // Builtins / Special
-  const builtins = /\b(print|len|range|str|int|float|list|dict|set|tuple|enumerate|zip|sum|min|max|type|abs|round|open)\b/g;
-  highlighted = highlighted.replace(builtins, '<span class="py-builtin">$1</span>');
-
-  // Decorators
-  highlighted = highlighted.replace(/(@\w+)/g, '<span class="py-decorator">$1</span>');
-
-  // Numbers
-  highlighted = highlighted.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="py-number">$1</span>');
-
-  // Operators
-  highlighted = highlighted.replace(/([+\-*/%=<>!&|^~]+)/g, '<span class="py-operator">$1</span>');
-
-  return highlighted;
+  return code.replace(tokenRegex, (match, comment, str, keyword, builtin, decorator, num, operator, word, space, char) => {
+    if (comment) {
+      return `<span class="py-comment">${escapeHtml(comment)}</span>`;
+    }
+    if (str) {
+      return `<span class="py-string">${escapeHtml(str)}</span>`;
+    }
+    if (keyword) {
+      return `<span class="py-keyword">${escapeHtml(keyword)}</span>`;
+    }
+    if (builtin) {
+      return `<span class="py-builtin">${escapeHtml(builtin)}</span>`;
+    }
+    if (decorator) {
+      return `<span class="py-decorator">${escapeHtml(decorator)}</span>`;
+    }
+    if (num) {
+      return `<span class="py-number">${escapeHtml(num)}</span>`;
+    }
+    if (operator) {
+      return `<span class="py-operator">${escapeHtml(operator)}</span>`;
+    }
+    if (word) {
+      return escapeHtml(word);
+    }
+    if (space) {
+      return space;
+    }
+    if (char) {
+      return escapeHtml(char);
+    }
+    return escapeHtml(match);
+  });
 };
 
 // Simple Markdown Renderer (Light Mode optimized)
@@ -93,7 +117,8 @@ const PlotlyChart: React.FC<{ plotlyData: any }> = ({ plotlyData }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
     
     // Set a sleek light layout template
     const layout = {
@@ -120,14 +145,14 @@ const PlotlyChart: React.FC<{ plotlyData: any }> = ({ plotlyData }) => {
       margin: { t: 40, r: 20, b: 40, l: 40 }
     };
 
-    Plotly.newPlot(containerRef.current, plotlyData.data, layout, {
+    Plotly.newPlot(container, plotlyData.data, layout, {
       responsive: true,
       displayModeBar: false,
     });
 
     return () => {
-      if (containerRef.current) {
-        Plotly.purge(containerRef.current);
+      if (container) {
+        Plotly.purge(container);
       }
     };
   }, [plotlyData]);

@@ -22,8 +22,8 @@ export const D3Network: React.FC = () => {
     if (!svgElement) return;
 
     // Dimensions
-    const width = 600;
-    const height = 300;
+    const width = 800;
+    const height = 460;
 
     // Clear previous elements
     d3.select(svgElement).selectAll('*').remove();
@@ -33,25 +33,32 @@ export const D3Network: React.FC = () => {
       .attr('width', '100%')
       .attr('height', '100%');
 
-    // Create Neural Network nodes (3 input, 4 hidden 1, 4 hidden 2, 2 output)
+    // Create Neural Network nodes (5 input, 6 hidden 1, 6 hidden 2, 3 output)
     const nodes: NetworkNode[] = [
       // Input Layer (layer 0)
       { id: 'i1', layer: 0, label: 'x1', val: 0.8 },
       { id: 'i2', layer: 0, label: 'x2', val: 0.5 },
       { id: 'i3', layer: 0, label: 'x3', val: 0.9 },
+      { id: 'i4', layer: 0, label: 'x4', val: 0.7 },
+      { id: 'i5', layer: 0, label: 'x5', val: 0.4 },
       // Hidden Layer 1 (layer 1)
       { id: 'h1_1', layer: 1, label: 'h1_1', val: 0.6 },
       { id: 'h1_2', layer: 1, label: 'h1_2', val: 0.4 },
       { id: 'h1_3', layer: 1, label: 'h1_3', val: 0.7 },
       { id: 'h1_4', layer: 1, label: 'h1_4', val: 0.3 },
+      { id: 'h1_5', layer: 1, label: 'h1_5', val: 0.8 },
+      { id: 'h1_6', layer: 1, label: 'h1_6', val: 0.5 },
       // Hidden Layer 2 (layer 2)
       { id: 'h2_1', layer: 2, label: 'h2_1', val: 0.5 },
       { id: 'h2_2', layer: 2, label: 'h2_2', val: 0.8 },
       { id: 'h2_3', layer: 2, label: 'h2_3', val: 0.2 },
       { id: 'h2_4', layer: 2, label: 'h2_4', val: 0.6 },
+      { id: 'h2_5', layer: 2, label: 'h2_5', val: 0.4 },
+      { id: 'h2_6', layer: 2, label: 'h2_6', val: 0.7 },
       // Output Layer (layer 3)
       { id: 'o1', layer: 3, label: 'y1', val: 0.95 },
       { id: 'o2', layer: 3, label: 'y2', val: 0.05 },
+      { id: 'o3', layer: 3, label: 'y3', val: 0.34 },
     ];
 
     // Establish fully connected feedforward links
@@ -79,12 +86,16 @@ export const D3Network: React.FC = () => {
       node.y = rowGap * (idx + 1);
     });
 
-    // Force simulation
+    // Force simulation with column-restraining x-forces to prevent horizontal collapse
     const simulation = d3.forceSimulation<NetworkNode>(nodes)
-      .force('link', d3.forceLink<NetworkNode, NetworkLink>(links).id(d => d.id).distance(80))
-      .force('charge', d3.forceManyBody().strength(-150))
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(25));
+      .force('link', d3.forceLink<NetworkNode, NetworkLink>(links).id(d => d.id).distance(180))
+      .force('charge', d3.forceManyBody().strength(-200))
+      .force('x', d3.forceX<NetworkNode>().x(d => {
+        const colWidth = width / 4;
+        return colWidth * d.layer + colWidth / 2;
+      }).strength(0.85))
+      .force('y', d3.forceY<NetworkNode>().y(height / 2).strength(0.08))
+      .force('collision', d3.forceCollide().radius(36));
 
     // Links container (soft dark line for light theme)
     const linkGroup = svg.append('g')
@@ -93,8 +104,8 @@ export const D3Network: React.FC = () => {
       .data(links)
       .enter()
       .append('line')
-      .attr('stroke', 'rgba(15, 23, 42, 0.05)')
-      .attr('stroke-width', d => d.value)
+      .attr('stroke', 'rgba(15, 23, 42, 0.08)')
+      .attr('stroke-width', d => d.value * 1.2)
       .style('stroke-dasharray', '3,3');
 
     // Pulsing signal elements (representing feedforward activations)
@@ -107,7 +118,7 @@ export const D3Network: React.FC = () => {
         .data(links)
         .enter()
         .append('circle')
-        .attr('r', 2.5)
+        .attr('r', 4)
         .attr('fill', (d) => {
           // Color signal based on layers (vibrant colors)
           const src = d.source as NetworkNode;
@@ -115,7 +126,7 @@ export const D3Network: React.FC = () => {
           if (src.layer === 1) return '#6366F1'; // Indigo for hidden 1
           return '#F43F5E'; // Rose for deep
         })
-        .style('filter', 'drop-shadow(0px 0px 3px currentColor)')
+        .style('filter', 'drop-shadow(0px 0px 4px currentColor)')
         .each(function(d) {
           const self = d3.select(this);
           const src = d.source as NetworkNode;
@@ -166,7 +177,7 @@ export const D3Network: React.FC = () => {
 
     // Node glowing shadows (Light Theme optimized)
     nodeGroup.append('circle')
-      .attr('r', 16)
+      .attr('r', 28)
       .attr('fill', d => {
         if (d.layer === 0) return 'rgba(16, 185, 129, 0.08)'; // input
         if (d.layer === 1) return 'rgba(99, 102, 241, 0.08)'; // hidden 1
@@ -179,12 +190,12 @@ export const D3Network: React.FC = () => {
         if (d.layer === 2) return '#A855F7';
         return '#F43F5E';
       })
-      .attr('stroke-width', 1.5)
+      .attr('stroke-width', 2.5)
       .style('cursor', 'grab');
 
     // Inner core (Solid white for contrast in light theme)
     nodeGroup.append('circle')
-      .attr('r', 8)
+      .attr('r', 16)
       .attr('fill', '#FFFFFF')
       .style('pointer-events', 'none');
 
@@ -192,10 +203,10 @@ export const D3Network: React.FC = () => {
     nodeGroup.append('text')
       .text(d => d.label)
       .attr('x', 0)
-      .attr('y', -22)
+      .attr('y', -36)
       .attr('text-anchor', 'middle')
       .attr('fill', '#475569')
-      .attr('font-size', '10px')
+      .attr('font-size', '13px')
       .attr('font-family', 'ui-monospace, monospace')
       .style('pointer-events', 'none');
 
@@ -203,10 +214,10 @@ export const D3Network: React.FC = () => {
     nodeGroup.append('text')
       .text(d => d.val.toFixed(1))
       .attr('x', 0)
-      .attr('y', 3.5)
+      .attr('y', 4.5)
       .attr('text-anchor', 'middle')
       .attr('fill', '#0F172A')
-      .attr('font-size', '9px')
+      .attr('font-size', '12px')
       .attr('font-weight', 'bold')
       .attr('font-family', 'sans-serif')
       .style('pointer-events', 'none');
@@ -229,12 +240,12 @@ export const D3Network: React.FC = () => {
   }, []);
 
   return (
-    <div className="glass-card rounded-3xl p-6 relative flex flex-col justify-between w-full h-[350px]">
+    <div className="glass-card rounded-3xl p-8 relative flex flex-col justify-between w-full h-[550px] md:h-[620px]">
       <div>
-        <h4 className="font-sans text-xs font-semibold tracking-wider text-slate-500 mb-1 uppercase">
+        <h4 className="font-sans text-sm font-bold tracking-wider text-slate-500 mb-1 uppercase">
           Neural Network Visualizer (Live D3 simulation)
         </h4>
-        <p className="text-xs text-slate-400 mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           Interactive feedforward connection paths. Drag nodes to reshape and study activation values.
         </p>
       </div>

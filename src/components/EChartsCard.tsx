@@ -17,20 +17,14 @@ export const EChartsCard: React.FC<EChartsCardProps> = ({
   const chartRef = useRef<HTMLDivElement | null>(null);
   const instanceRef = useRef<echarts.ECharts | null>(null);
 
+  // Effect 1: Initialize chart instance ONCE and handle cleanup
   useEffect(() => {
     if (!chartRef.current) return;
 
-    // Initialize ECharts instance with default theme (light mode compatible)
     const chart = echarts.init(chartRef.current, undefined, {
       renderer: 'canvas',
     });
     instanceRef.current = chart;
-
-    // Set options
-    chart.setOption({
-      backgroundColor: 'transparent',
-      ...option
-    });
 
     const handleResize = () => {
       chart.resize();
@@ -41,7 +35,18 @@ export const EChartsCard: React.FC<EChartsCardProps> = ({
     return () => {
       window.removeEventListener('resize', handleResize);
       chart.dispose();
+      instanceRef.current = null;
     };
+  }, []); // Empty deps — only runs on mount/unmount
+
+  // Effect 2: Update options on the existing instance (no dispose/recreate)
+  useEffect(() => {
+    if (!instanceRef.current) return;
+
+    instanceRef.current.setOption({
+      backgroundColor: 'transparent',
+      ...option
+    }, { notMerge: false, lazyUpdate: true });
   }, [option]);
 
   return (
