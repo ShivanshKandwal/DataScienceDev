@@ -30,6 +30,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'customer_churn',
+    title: "Customer Churn Prediction Model",
+    description: "Supervised binary classification model predicting customer churn probabilities using Scikit-Learn Random Forest. Plots ROC curve benchmarks.",
+    category: 'ML',
+    notebookUrl: './notebooks/customer_churn.ipynb',
+    tags: ["Scikit-Learn", "Random Forest", "Classification", "Plotly"],
+    date: '2026-06-25',
+    metrics: {
+     
+      "ROC AUC": "0.892",
+      "F1-Score": "0.845",
+      "Accuracy": "87.2%"
+
+    }
+  },
+  {
     id: 'housing_regression',
     title: "Housing Market Prices Regression Model",
     description: "Predictive pricing utilizing Random Forest and XGBoost Regressor. Implements cross-validated hyperparameter tuning and recursive feature elimination.",
@@ -44,6 +60,38 @@ export const projectsData: ProjectData[] = [
       "R\u00b2 Score": "0.915",
       "CV Folds": "10",
       "RMSE": "$14.2k"
+
+    }
+  },
+  {
+    id: 'iris_clustering',
+    title: "Iris Flowers Clustering & PCA",
+    description: "Dimensionality reduction using PCA and cluster partitioning using K-Means on the classic Iris dataset. Visualizes 2D projection clusters.",
+    category: 'EDA',
+    notebookUrl: './notebooks/iris_clustering.ipynb',
+    tags: ["Scikit-Learn", "PCA", "K-Means", "Matplotlib"],
+    date: '2026-06-25',
+    metrics: {
+     
+      "Clusters": "3",
+      "PCA Variance": "92.4%",
+      "Samples": "150"
+
+    }
+  },
+  {
+    id: 'mnist_classifier',
+    title: "MNIST Handwritten Digits CNN",
+    description: "Building a convolutional neural network in PyTorch to classify handwritten digits. Visualizes predicted digit masks and weights.",
+    category: 'AI',
+    notebookUrl: './notebooks/mnist_classifier.ipynb',
+    tags: ["PyTorch", "CNN", "Deep Learning", "Matplotlib"],
+    date: '2026-06-25',
+    metrics: {
+     
+      "Test Acc": "99.1%",
+      "Epochs": "5",
+      "Parameters": "21.8k"
 
     }
   },
