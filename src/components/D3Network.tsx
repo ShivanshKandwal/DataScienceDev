@@ -86,14 +86,14 @@ export const D3Network: React.FC = () => {
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide().radius(25));
 
-    // Links container
+    // Links container (soft dark line for light theme)
     const linkGroup = svg.append('g')
       .attr('class', 'links')
       .selectAll('line')
       .data(links)
       .enter()
       .append('line')
-      .attr('stroke', 'rgba(255, 255, 255, 0.08)')
+      .attr('stroke', 'rgba(15, 23, 42, 0.05)')
       .attr('stroke-width', d => d.value)
       .style('stroke-dasharray', '3,3');
 
@@ -109,13 +109,13 @@ export const D3Network: React.FC = () => {
         .append('circle')
         .attr('r', 2.5)
         .attr('fill', (d) => {
-          // Color signal based on layers
+          // Color signal based on layers (vibrant colors)
           const src = d.source as NetworkNode;
           if (src.layer === 0) return '#10B981'; // Green for input
           if (src.layer === 1) return '#6366F1'; // Indigo for hidden 1
           return '#F43F5E'; // Rose for deep
         })
-        .style('filter', 'drop-shadow(0px 0px 4px currentColor)')
+        .style('filter', 'drop-shadow(0px 0px 3px currentColor)')
         .each(function(d) {
           const self = d3.select(this);
           const src = d.source as NetworkNode;
@@ -164,14 +164,14 @@ export const D3Network: React.FC = () => {
           })
       );
 
-    // Node glowing shadows
+    // Node glowing shadows (Light Theme optimized)
     nodeGroup.append('circle')
       .attr('r', 16)
       .attr('fill', d => {
-        if (d.layer === 0) return 'rgba(16, 185, 129, 0.15)'; // input
-        if (d.layer === 1) return 'rgba(99, 102, 241, 0.15)'; // hidden 1
-        if (d.layer === 2) return 'rgba(168, 85, 247, 0.15)'; // hidden 2
-        return 'rgba(244, 63, 94, 0.15)'; // output
+        if (d.layer === 0) return 'rgba(16, 185, 129, 0.08)'; // input
+        if (d.layer === 1) return 'rgba(99, 102, 241, 0.08)'; // hidden 1
+        if (d.layer === 2) return 'rgba(168, 85, 247, 0.08)'; // hidden 2
+        return 'rgba(244, 63, 94, 0.08)'; // output
       })
       .attr('stroke', d => {
         if (d.layer === 0) return '#10B981';
@@ -182,20 +182,19 @@ export const D3Network: React.FC = () => {
       .attr('stroke-width', 1.5)
       .style('cursor', 'grab');
 
-    // Inner glowing core
+    // Inner core (Solid white for contrast in light theme)
     nodeGroup.append('circle')
-      .attr('r', 6)
+      .attr('r', 8)
       .attr('fill', '#FFFFFF')
-      .style('opacity', 0.8)
       .style('pointer-events', 'none');
 
-    // Label text
+    // Label text (Charcoal for light mode legibility)
     nodeGroup.append('text')
       .text(d => d.label)
       .attr('x', 0)
       .attr('y', -22)
       .attr('text-anchor', 'middle')
-      .attr('fill', '#94A3B8')
+      .attr('fill', '#475569')
       .attr('font-size', '10px')
       .attr('font-family', 'ui-monospace, monospace')
       .style('pointer-events', 'none');
@@ -204,9 +203,9 @@ export const D3Network: React.FC = () => {
     nodeGroup.append('text')
       .text(d => d.val.toFixed(1))
       .attr('x', 0)
-      .attr('y', 4)
+      .attr('y', 3.5)
       .attr('text-anchor', 'middle')
-      .attr('fill', '#FFFFFF')
+      .attr('fill', '#0F172A')
       .attr('font-size', '9px')
       .attr('font-weight', 'bold')
       .attr('font-family', 'sans-serif')
@@ -232,14 +231,14 @@ export const D3Network: React.FC = () => {
   return (
     <div className="glass-card rounded-3xl p-6 relative flex flex-col justify-between w-full h-[350px]">
       <div>
-        <h4 className="font-sans text-sm font-semibold tracking-wider text-slate-400 mb-1 uppercase">
+        <h4 className="font-sans text-xs font-semibold tracking-wider text-slate-500 mb-1 uppercase">
           Neural Network Visualizer (Live D3 simulation)
         </h4>
-        <p className="text-xs text-slate-500 mb-4">
+        <p className="text-xs text-slate-400 mb-4">
           Interactive feedforward connection paths. Drag nodes to reshape and study activation values.
         </p>
       </div>
-      <div className="flex-1 w-full relative overflow-hidden bg-slate-950/20 rounded-2xl border border-white/5">
+      <div className="flex-1 w-full relative overflow-hidden bg-white/20 rounded-2xl border border-black/5">
         <svg ref={svgRef} className="w-full h-full" />
       </div>
     </div>

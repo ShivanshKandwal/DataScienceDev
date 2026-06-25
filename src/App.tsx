@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { SVGProps } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Sparkles } from 'lucide-react';
+import { Mail, Sparkles, ChevronRight, BookOpen, Binary, BarChart2 } from 'lucide-react';
 import * as echarts from 'echarts';
 import { NeuralBackground } from './components/NeuralBackground';
-import { TerminalDashboard } from './components/TerminalDashboard';
 import { EChartsCard } from './components/EChartsCard';
 import { D3Network } from './components/D3Network';
 import { ProjectCard } from './components/ProjectCard';
@@ -28,29 +27,8 @@ const LinkedinIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-
-// GitHub Contribution Calendar Simulation Data
-const generateContributionGrid = () => {
-  const grid = [];
-  const levels = [0, 1, 2, 3, 4];
-  // 52 columns, 7 rows for a standard calendar representation
-  for (let col = 0; col < 32; col++) {
-    const column = [];
-    for (let row = 0; row < 7; row++) {
-      // Weight higher numbers for recent columns to show active daily contribution
-      const weight = col > 25 ? 0.8 : 0.45;
-      const level = Math.random() < weight ? levels[Math.floor(Math.random() * 4) + 1] : 0;
-      column.push(level);
-    }
-    grid.push(column);
-  }
-  return grid;
-};
-
-const contributionGrid = generateContributionGrid();
-
 export default function App() {
-  const [activeSection, setActiveSection] = useState<'All' | 'EDA' | 'ML' | 'AI'>('All');
+  const [currentPage, setCurrentPage] = useState<'Home' | 'Visuals' | 'ML' | 'AI'>('Home');
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -63,19 +41,13 @@ export default function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Filter projects by category
-  const filteredProjects = projectsData.filter((project) => {
-    if (activeSection === 'All') return true;
-    return project.category === activeSection;
-  });
-
-  // Spotlight color shifts based on selected tab
+  // Spotlight color shifts based on selected tab (Light Theme colors)
   const getGlowColor = () => {
-    switch (activeSection) {
-      case 'EDA': return 'radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0) 70%)';
-      case 'ML': return 'radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(99, 102, 241, 0) 70%)';
-      case 'AI': return 'radial-gradient(circle, rgba(244, 63, 94, 0.25) 0%, rgba(244, 63, 94, 0) 70%)';
-      default: return 'radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(168, 85, 247, 0) 70%)';
+    switch (currentPage) {
+      case 'Visuals': return 'radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 70%)';
+      case 'ML': return 'radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%)';
+      case 'AI': return 'radial-gradient(circle, rgba(244, 63, 94, 0.12) 0%, rgba(244, 63, 94, 0) 70%)';
+      default: return 'radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(168, 85, 247, 0) 70%)';
     }
   };
 
@@ -83,13 +55,13 @@ export default function App() {
   const trainingChartOption: echarts.EChartsOption = {
     tooltip: {
       trigger: 'axis',
-      backgroundColor: 'rgba(11, 8, 22, 0.9)',
-      borderColor: 'rgba(255, 255, 255, 0.08)',
-      textStyle: { color: '#F8FAFC' }
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: 'rgba(0, 0, 0, 0.08)',
+      textStyle: { color: '#1E293B' }
     },
     legend: {
       data: ['Training Loss', 'Validation Accuracy'],
-      textStyle: { color: '#94A3B8', fontFamily: 'Outfit, sans-serif' },
+      textStyle: { color: '#64748B', fontFamily: 'Outfit, sans-serif' },
       bottom: '0%'
     },
     grid: { left: '3%', right: '4%', top: '10%', bottom: '15%', containLabel: true },
@@ -97,16 +69,16 @@ export default function App() {
       type: 'category' as const,
       boundaryGap: false,
       data: ['Epoch 20', 'Epoch 40', 'Epoch 60', 'Epoch 80', 'Epoch 100', 'Epoch 120'],
-      axisLabel: { color: '#94A3B8' },
-      axisLine: { lineStyle: { color: 'rgba(255, 255, 255, 0.1)' } }
+      axisLabel: { color: '#64748B' },
+      axisLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.06)' } }
     },
     yAxis: [
       {
         type: 'value' as const,
         name: 'Loss',
         position: 'left',
-        splitLine: { lineStyle: { color: 'rgba(255, 255, 255, 0.05)' } },
-        axisLabel: { color: '#94A3B8' }
+        splitLine: { lineStyle: { color: 'rgba(0, 0, 0, 0.03)' } },
+        axisLabel: { color: '#64748B' }
       },
       {
         type: 'value' as const,
@@ -114,7 +86,7 @@ export default function App() {
         position: 'right',
         max: 100,
         splitLine: { show: false },
-        axisLabel: { color: '#94A3B8' }
+        axisLabel: { color: '#64748B' }
       }
     ],
     series: [
@@ -128,7 +100,7 @@ export default function App() {
         lineStyle: { width: 3 },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(244, 63, 94, 0.2)' },
+            { offset: 0, color: 'rgba(244, 63, 94, 0.08)' },
             { offset: 1, color: 'rgba(244, 63, 94, 0)' }
           ])
         }
@@ -143,7 +115,7 @@ export default function App() {
         lineStyle: { width: 3 },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(16, 185, 129, 0.2)' },
+            { offset: 0, color: 'rgba(16, 185, 129, 0.08)' },
             { offset: 1, color: 'rgba(16, 185, 129, 0)' }
           ])
         }
@@ -151,9 +123,8 @@ export default function App() {
     ]
   };
 
-
   return (
-    <div className="relative min-h-screen overflow-hidden selection:bg-purple-500/30 selection:text-white font-sans text-slate-200 pb-20">
+    <div className="relative min-h-screen overflow-hidden selection:bg-purple-500/20 selection:text-slate-900 text-slate-700 pb-20">
       
       {/* Interactive Cursor Spotlight Glow */}
       <div 
@@ -165,7 +136,7 @@ export default function App() {
         }}
       />
 
-      {/* Dynamic Animated Gradient Blobs */}
+      {/* Dynamic Animated Bright Gradient Blobs */}
       <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] blob blob-purple opacity-40 z-0" />
       <div className="absolute bottom-[20%] right-[-10%] w-[700px] h-[700px] blob blob-indigo opacity-35 z-0" />
       <div className="absolute top-[40%] left-[30%] w-[600px] h-[600px] blob blob-pink opacity-30 z-0" />
@@ -177,16 +148,16 @@ export default function App() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         
         {/* Navigation / Header */}
-        <header className="flex flex-col md:flex-row justify-between items-center py-6 border-b border-white/5 mb-12">
+        <header className="flex flex-col md:flex-row justify-between items-center py-5 border-b border-black/5 mb-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center shadow-md shadow-purple-500/10">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <div>
-              <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-white m-0">
+            <div className="text-left">
+              <h1 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-slate-800 m-0">
                 Shivansh Kandwal
               </h1>
-              <p className="text-xs md:text-sm text-slate-400 font-mono tracking-wide mt-0.5">
+              <p className="text-xs md:text-sm text-slate-500 font-mono tracking-wide mt-0.5">
                 AI &amp; Data Science Research Sandbox
               </p>
             </div>
@@ -198,7 +169,7 @@ export default function App() {
               href="https://github.com/ShivanshKandwal" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/15 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+              className="p-2.5 rounded-xl bg-white/60 border border-slate-200/60 hover:border-slate-350 text-slate-500 hover:text-slate-800 hover:bg-white/90 transition-all"
             >
               <GithubIcon className="w-4.5 h-4.5" />
             </a>
@@ -206,164 +177,276 @@ export default function App() {
               href="https://linkedin.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/15 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+              className="p-2.5 rounded-xl bg-white/60 border border-slate-200/60 hover:border-slate-350 text-slate-500 hover:text-slate-800 hover:bg-white/90 transition-all"
             >
               <LinkedinIcon className="w-4.5 h-4.5" />
             </a>
             <a 
               href="mailto:contact@shivanshkandwal.com" 
-              className="p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/15 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+              className="p-2.5 rounded-xl bg-white/60 border border-slate-200/60 hover:border-slate-350 text-slate-500 hover:text-slate-800 hover:bg-white/90 transition-all"
             >
               <Mail className="w-4.5 h-4.5" />
             </a>
           </div>
         </header>
 
-        {/* Dashboard Grid Layout */}
-        <main className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          {/* LEFT SIDEBAR: Visual Models & Terminal Control (Grid Span 5) */}
-          <section className="lg:col-span-5 space-y-8">
+        {/* Sticky top Navigation Links (Decoupled router) */}
+        <div className="flex items-center justify-center mb-12">
+          <div className="flex gap-1.5 bg-white/40 p-1.5 rounded-2xl border border-black/5 shadow-sm backdrop-blur">
+            {([
+              { key: 'Home', label: 'Overview' },
+              { key: 'Visuals', label: 'Data Visuals & Dashboards' },
+              { key: 'ML', label: 'Machine Learning' },
+              { key: 'AI', label: 'Deep Learning / AI' }
+            ] as const).map((tab) => {
+              const isActive = currentPage === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  onClick={() => setCurrentPage(tab.key)}
+                  className={`relative px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all ${
+                    isActive 
+                      ? 'bg-gradient-to-tr from-purple-500 to-pink-500 text-white shadow shadow-purple-500/20' 
+                      : 'text-slate-500 hover:text-slate-800 hover:bg-white/40'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Page Switcher */}
+        <div className="min-h-[50vh]">
+          <AnimatePresence mode="wait">
             
-            {/* Live Model Training Metrics (ECharts) */}
-            <EChartsCard 
-              title="CNN Model Loss & Accuracy (Live Train Curve)" 
-              option={trainingChartOption} 
-              height="240px"
-            />
-
-            {/* Neural Net Graph Layout (D3) */}
-            <D3Network />
-
-            {/* Simulated Data CLI terminal */}
-            <TerminalDashboard />
-
-          </section>
-
-          {/* RIGHT SHOWCASE: Projects Ledger, Calendar, Activity (Grid Span 7) */}
-          <section className="lg:col-span-7 space-y-8">
-
-            {/* GitHub Contributions Sandbox */}
-            <div className="glass-card rounded-3xl p-6 border border-white/5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/5 mb-6">
-                <div>
-                  <h3 className="font-serif text-lg font-medium text-slate-100">
-                    Daily Contributions Sandbox
-                  </h3>
-                  <p className="text-xs text-slate-400 font-mono tracking-wide mt-0.5">
-                    Commit activity on active GitHub Pages deployment
+            {/* 1. LANDING PAGE: OVERVIEW & STRUCTURE GUIDE */}
+            {currentPage === 'Home' && (
+              <motion.div
+                key="home"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-12 max-w-4xl mx-auto"
+              >
+                {/* Hero Introduction */}
+                <div className="text-center space-y-4">
+                  <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-slate-800">
+                    AI &amp; Data Science Research Sandbox
+                  </h2>
+                  <p className="text-slate-600 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                    Welcome to my active project index. This website acts as a visual interface to explore notebook outputs, Matplotlib plots, live web metrics, and interactive algorithms.
                   </p>
                 </div>
-                <div className="flex items-center gap-6 font-mono text-center">
-                  <div>
-                    <span className="text-[10px] text-slate-500 uppercase block">Streak</span>
-                    <span className="text-sm font-bold text-emerald-400">12 Days</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-500 uppercase block">Total Commits</span>
-                    <span className="text-sm font-bold text-purple-400">482</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-500 uppercase block">Active rate</span>
-                    <span className="text-sm font-bold text-pink-400">98%</span>
-                  </div>
-                </div>
-              </div>
 
-              {/* Grid Calendar Visual */}
-              <div className="overflow-x-auto no-scrollbar">
-                <div className="flex gap-1 min-w-[500px]">
-                  {contributionGrid.map((column, colIdx) => (
-                    <div key={colIdx} className="flex flex-col gap-1 flex-1">
-                      {column.map((level, rowIdx) => {
-                        const bgClass = {
-                          0: 'bg-white/5',
-                          1: 'bg-emerald-500/20',
-                          2: 'bg-emerald-500/40',
-                          3: 'bg-emerald-500/70',
-                          4: 'bg-emerald-500'
-                        }[level as 0 | 1 | 2 | 3 | 4];
-
-                        return (
-                          <div 
-                            key={rowIdx} 
-                            className={`aspect-square rounded-[2px] transition-colors duration-300 hover:scale-125 hover:z-10 cursor-pointer ${bgClass}`}
-                            title={`Commits Level: ${level}`}
-                          />
-                        );
-                      })}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-end gap-1.5 mt-3 text-[10px] font-mono text-slate-500">
-                <span>Less</span>
-                <span className="w-2.5 h-2.5 rounded-[1px] bg-white/5" />
-                <span className="w-2.5 h-2.5 rounded-[1px] bg-emerald-500/20" />
-                <span className="w-2.5 h-2.5 rounded-[1px] bg-emerald-500/40" />
-                <span className="w-2.5 h-2.5 rounded-[1px] bg-emerald-500/70" />
-                <span className="w-2.5 h-2.5 rounded-[1px] bg-emerald-500" />
-                <span>More</span>
-              </div>
-            </div>
-
-            {/* Section Controls (Filters) */}
-            <div className="flex items-center justify-between border-b border-white/5 pb-2">
-              <div className="flex gap-1 bg-white/3 p-1 rounded-2xl border border-white/5 relative">
-                {(['All', 'EDA', 'ML', 'AI'] as const).map((section) => {
-                  const isActive = activeSection === section;
-                  const label = {
-                    All: 'All Sandbox',
-                    EDA: 'EDA',
-                    ML: 'Machine Learning',
-                    AI: 'Deep Learning'
-                  }[section];
-
-                  return (
-                    <button
-                      key={section}
-                      onClick={() => setActiveSection(section)}
-                      className={`relative px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all ${
-                        isActive 
-                          ? 'bg-gradient-to-tr from-purple-500/80 to-pink-500/80 text-white shadow shadow-purple-500/20' 
-                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/2'
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-              </div>
-              <span className="text-xs text-slate-500 font-mono hidden sm:inline">
-                Showing {filteredProjects.length} projects
-              </span>
-            </div>
-
-            {/* Projects Showcase Ledger Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <AnimatePresence mode="popLayout">
-                {filteredProjects.map((project) => (
-                  <motion.div
-                    key={project.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                {/* Walkthrough Layout Guide */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                  
+                  {/* Card 1: Visuals */}
+                  <div 
+                    onClick={() => setCurrentPage('Visuals')}
+                    className="glass-card p-6 md:p-8 rounded-3xl border border-emerald-500/20 hover:border-emerald-500/40 cursor-pointer shadow-sm text-left group hover:scale-[1.01] transition-all"
                   >
-                    <ProjectCard 
-                      project={project} 
-                      onOpenNotebook={() => setSelectedProject(project)}
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4 text-emerald-600">
+                      <BarChart2 className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-slate-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                      Data Visuals &amp; Dashboards
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                      Exploratory findings, correlation matrices, and custom data network nodes. Includes fully interactive ECharts distributions and D3 networks.
+                    </p>
+                    <div className="flex items-center gap-1 text-xs font-semibold text-emerald-600 mt-auto">
+                      <span>Explore Visuals</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                  {/* Card 2: ML */}
+                  <div 
+                    onClick={() => setCurrentPage('ML')}
+                    className="glass-card p-6 md:p-8 rounded-3xl border border-indigo-500/20 hover:border-indigo-500/40 cursor-pointer shadow-sm text-left group hover:scale-[1.01] transition-all"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center mb-4 text-indigo-600">
+                      <Binary className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors">
+                      Machine Learning
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                      Predictive regression modeling, feature imputations, and parameter searches. Linked to live dashboard applications.
+                    </p>
+                    <div className="flex items-center gap-1 text-xs font-semibold text-indigo-600 mt-auto">
+                      <span>Explore ML Models</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                  {/* Card 3: Deep Learning / AI */}
+                  <div 
+                    onClick={() => setCurrentPage('AI')}
+                    className="glass-card p-6 md:p-8 rounded-3xl border border-rose-500/20 hover:border-rose-500/40 cursor-pointer shadow-sm text-left group hover:scale-[1.01] transition-all"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center mb-4 text-rose-600">
+                      <BookOpen className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-slate-800 mb-2 group-hover:text-rose-600 transition-colors">
+                      Deep Learning / AI
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                      Neural network training loops, convolutional segmentation layers, and MRI scan prediction mask notebooks built in PyTorch.
+                    </p>
+                    <div className="flex items-center gap-1 text-xs font-semibold text-rose-600 mt-auto">
+                      <span>Explore Neural Nets</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Visual Overview Details Banner */}
+                <div className="glass-card rounded-3xl p-6 md:p-8 border border-black/5 bg-white/40 flex flex-col md:flex-row items-center gap-6 text-left">
+                  <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-600 shrink-0">
+                    <Sparkles className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-lg font-bold text-slate-800 mb-1">
+                      Interactive Code Integration
+                    </h4>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      Every project features an integrated Jupyter Notebook viewer. You can click on the projects inside the sections to see python code alongside parsed output tables, matplotlib figures, and zoomable Plotly JSON charts.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* 2. DATA VISUALS & DASHBOARDS PAGE */}
+            {currentPage === 'Visuals' && (
+              <motion.div
+                key="visuals"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                {/* Visuals Intro Header */}
+                <div className="text-left max-w-2xl mb-8">
+                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-slate-800">
+                    Data Visuals &amp; Dashboards
+                  </h2>
+                  <p className="text-slate-600 text-sm md:text-base mt-1">
+                    Exploratory analysis sandbox. Use the interactive D3 nodes to explore data connections, and click on projects below to study Jupyter findings.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  {/* Left Column: Interactive D3 Network Node (Grid Span 5) */}
+                  <div className="lg:col-span-5">
+                    <D3Network />
+                  </div>
+                  {/* Right Column: Visuals Catalog Ledger (Grid Span 7) */}
+                  <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {projectsData
+                      .filter((p) => p.category === 'EDA')
+                      .map((project) => (
+                        <ProjectCard 
+                          key={project.id} 
+                          project={project} 
+                          onOpenNotebook={() => setSelectedProject(project)}
+                        />
+                      ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* 3. MACHINE LEARNING PAGE */}
+            {currentPage === 'ML' && (
+              <motion.div
+                key="ml"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                {/* ML Intro Header */}
+                <div className="text-left max-w-2xl mb-8">
+                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-slate-800">
+                    Machine Learning Models
+                  </h2>
+                  <p className="text-slate-600 text-sm md:text-base mt-1">
+                    Regression and classification estimators. Explore xgboost regression curves, and launch streamlit dashboards to deploy predicting inputs.
+                  </p>
+                </div>
+
+                {/* ML Grid Catalog */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {projectsData
+                    .filter((p) => p.category === 'ML')
+                    .map((project) => (
+                      <ProjectCard 
+                        key={project.id} 
+                        project={project} 
+                        onOpenNotebook={() => setSelectedProject(project)}
+                      />
+                    ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* 4. DEEP LEARNING / AI PAGE */}
+            {currentPage === 'AI' && (
+              <motion.div
+                key="ai"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-8"
+              >
+                {/* AI Intro Header */}
+                <div className="text-left max-w-2xl mb-8">
+                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-slate-800">
+                    Deep Learning &amp; Cognitive AI
+                  </h2>
+                  <p className="text-slate-600 text-sm md:text-base mt-1">
+                    Neural network weights training logs. Examine PyTorch CNN configurations and inspect model convergence losses.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  {/* Left Column: Live CNN convergence ECharts (Grid Span 5) */}
+                  <div className="lg:col-span-5">
+                    <EChartsCard 
+                      title="CNN Model Loss & Accuracy (Live Train Curve)" 
+                      option={trainingChartOption} 
+                      height="260px"
                     />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
+                  </div>
+                  {/* Right Column: AI Catalog Ledger (Grid Span 7) */}
+                  <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {projectsData
+                      .filter((p) => p.category === 'AI')
+                      .map((project) => (
+                        <ProjectCard 
+                          key={project.id} 
+                          project={project} 
+                          onOpenNotebook={() => setSelectedProject(project)}
+                        />
+                      ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
 
-          </section>
+          </AnimatePresence>
+        </div>
 
-        </main>
       </div>
 
       {/* Jupyter Notebook Interactive Details Modal Overlay */}

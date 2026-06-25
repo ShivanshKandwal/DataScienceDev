@@ -20,8 +20,8 @@ export const EChartsCard: React.FC<EChartsCardProps> = ({
   useEffect(() => {
     if (!chartRef.current) return;
 
-    // Initialize ECharts instance
-    const chart = echarts.init(chartRef.current, 'dark', {
+    // Initialize ECharts instance with default theme (light mode compatible)
+    const chart = echarts.init(chartRef.current, undefined, {
       renderer: 'canvas',
     });
     instanceRef.current = chart;
@@ -47,7 +47,7 @@ export const EChartsCard: React.FC<EChartsCardProps> = ({
   return (
     <div className={`glass-card rounded-3xl p-6 relative flex flex-col justify-between ${className}`}>
       {title && (
-        <h4 className="font-sans text-sm font-semibold tracking-wider text-slate-400 mb-4 uppercase">
+        <h4 className="font-sans text-xs font-semibold tracking-wider text-slate-500 mb-4 uppercase">
           {title}
         </h4>
       )}
