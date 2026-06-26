@@ -45,36 +45,24 @@ def execute_cell(code_str, glob_env):
     tb = None
     
     try:
-        # Run code statefully
-        # We split the code into lines to run the last non-empty line as eval if it is an expression,
-        # so we can capture its return value (just like Jupyter does).
-        lines = [l for l in code_str.splitlines() if l.strip()]
+        # Run code statefully using AST parsing (matching Jupyter's last-expression evaluation behavior)
+        import ast
+        tree = ast.parse(code_str)
         
-        # Filter out lines that are only comments
-        code_lines = [l for l in lines if not l.strip().startswith('#')]
-        
-        if code_lines:
-            # Separate the last line
-            last_line = code_lines[-1]
-            # Reconstruct the preceding code
-            last_line_idx = len(code_str.splitlines()) - 1
-            for idx, orig_line in enumerate(reversed(code_str.splitlines())):
-                if orig_line.strip() == last_line.strip() and not orig_line.strip().startswith('#'):
-                    last_line_idx = len(code_str.splitlines()) - 1 - idx
-                    break
-            
-            preceding_code = "\n".join(code_str.splitlines()[:last_line_idx])
-            
-            # Exec preceding code
-            if preceding_code.strip():
-                exec(preceding_code, glob_env)
-            
-            # Try to eval the last line
-            try:
-                result = eval(last_line, glob_env)
-            except SyntaxError:
-                # If last line is statement (like assignments, import, def), run as exec
-                exec(last_line, glob_env)
+        if tree.body:
+            last_node = tree.body[-1]
+            if isinstance(last_node, ast.Expr):
+                # Compile and exec all statements except the last expression
+                if len(tree.body) > 1:
+                    exec_tree = ast.Module(body=tree.body[:-1], type_ignores=[])
+                    exec(compile(exec_tree, filename="<cell>", mode="exec"), glob_env)
+                
+                # Compile and eval the last expression to capture its return value
+                eval_tree = ast.Expression(body=last_node.value)
+                result = eval(compile(eval_tree, filename="<cell>", mode="eval"), glob_env)
+            else:
+                # If the last statement is not an expression (e.g. def, class, loop), run the whole cell
+                exec(compile(tree, filename="<cell>", mode="exec"), glob_env)
         else:
             exec(code_str, glob_env)
     except Exception as e:
