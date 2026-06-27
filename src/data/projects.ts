@@ -46,6 +46,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'dqn_cartpole',
+    title: "Deep Q-Network (DQN) CartPole Simulation",
+    description: "Implements a custom CartPole reinforcement learning physics simulator and trains a PyTorch DQN agent with experience replay and target networks.",
+    category: 'AI',
+    notebookUrl: './notebooks/dqn_cartpole.ipynb',
+    tags: ["DQN", "Deep RL", "PyTorch", "Matplotlib"],
+    date: '2026-06-27',
+    metrics: {
+     
+      "State Space": "4",
+      "Action Space": "2",
+      "Avg Reward": "185.4"
+
+    }
+  },
+  {
     id: 'fraud_detection',
     title: "Credit Card Fraud Detection",
     description: "Supervised anomaly detection on highly imbalanced transaction manifests. Implements cost-sensitive Random Forest classifiers and Precision-Recall curve benchmarks.",
@@ -58,6 +74,22 @@ export const projectsData: ProjectData[] = [
       "Fraud Rate": "0.8%",
       "PR-AUC": "0.862",
       "Recall@90%Prec": "82.4%"
+
+    }
+  },
+  {
+    id: 'house_valuation',
+    title: "House Valuation Regression Modeling",
+    description: "Evaluates property prices using Ridge Regression and Random Forest. Performs feature scaling, handles multicollinearity, and visualizes residuals using interactive Plotly scatter plots.",
+    category: 'ML',
+    notebookUrl: './notebooks/house_valuation.ipynb',
+    tags: ["Scikit-Learn", "Regression", "Random Forest", "Plotly"],
+    date: '2026-06-27',
+    metrics: {
+     
+      "R\u00b2 Score": "0.892",
+      "RMSE": "$32.4k",
+      "Dataset Size": "1500"
 
     }
   },
@@ -124,6 +156,22 @@ export const projectsData: ProjectData[] = [
       "Test Acc": "99.1%",
       "Epochs": "5",
       "Parameters": "21.8k"
+
+    }
+  },
+  {
+    id: 'stock_analysis',
+    title: "Stock Market Technical Analysis & Indicators",
+    description: "Simulates stock price trends and calculates critical technical indicators (SMA, EMA, RSI) for quantitative analysis and feature engineering.",
+    category: 'EDA',
+    notebookUrl: './notebooks/stock_analysis.ipynb',
+    tags: ["Time Series", "Technical Indicators", "Finance", "Matplotlib"],
+    date: '2026-06-27',
+    metrics: {
+     
+      "Time Range": "252 Days",
+      "Max Price": "$248.5",
+      "Final RSI": "58.2"
 
     }
   },
