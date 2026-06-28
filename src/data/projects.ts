@@ -13,6 +13,22 @@ export interface ProjectData {
 
 export const projectsData: ProjectData[] = [
   {
+    id: 'air_quality_decomposition',
+    title: "Air Quality Time-Series & Seasonal Decomposition",
+    description: "Simulates daily air quality indices and performs classical additive seasonal trend decomposition, profiling monthly variation boxplots.",
+    category: 'EDA',
+    notebookUrl: './notebooks/air_quality_decomposition.ipynb',
+    tags: ["Time Series", "EDA", "Seaborn", "Matplotlib"],
+    date: '2026-06-28',
+    metrics: {
+     
+      "Days Analyzed": "1095",
+      "Monthly Peak": "142.5",
+      "Trend Coefficient": "+2.4 / yr"
+
+    }
+  },
+  {
     id: 'brain_tumor_segment',
     title: "Brain Tumor MRI Segmentation U-Net",
     description: "Pixel-level segmentation of MRI scans using a custom PyTorch U-Net architecture. Employs dice loss coefficient optimizations and data augmentation matrices.",
@@ -160,6 +176,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'predictive_maintenance',
+    title: "Predictive Maintenance XGBoost Classifier",
+    description: "Trains a gradient boosting classifier to predict industrial machine failure modes from sensor logs. Analyzes feature importance scores.",
+    category: 'ML',
+    notebookUrl: './notebooks/predictive_maintenance.ipynb',
+    tags: ["XGBoost", "Classification", "Feature Importance", "Plotly"],
+    date: '2026-06-28',
+    metrics: {
+     
+      "ROC AUC": "0.868",
+      "Accuracy": "92.0%",
+      "Features": "6"
+
+    }
+  },
+  {
     id: 'stock_analysis',
     title: "Stock Market Technical Analysis & Indicators",
     description: "Simulates stock price trends and calculates critical technical indicators (SMA, EMA, RSI) for quantitative analysis and feature engineering.",
@@ -172,6 +204,38 @@ export const projectsData: ProjectData[] = [
       "Time Range": "252 Days",
       "Max Price": "$248.5",
       "Final RSI": "58.2"
+
+    }
+  },
+  {
+    id: 'svm_boundaries',
+    title: "SVM Decision Boundaries & Hyperparameter Tuning",
+    description: "Trains Support Vector Classifiers with varying kernel parameters (Linear, Poly, RBF) on non-linear dataset. Plots 2x2 decision boundary grid layouts.",
+    category: 'ML',
+    notebookUrl: './notebooks/svm_boundaries.ipynb',
+    tags: ["Scikit-Learn", "SVM", "Classification", "Matplotlib"],
+    date: '2026-06-28',
+    metrics: {
+     
+      "Accuracy": "94.5%",
+      "Support Vectors": "84",
+      "Kernels Tested": "3"
+
+    }
+  },
+  {
+    id: 'temperature_anomalies',
+    title: "Global Temperature Anomalies & Volcanic Activity Correlation",
+    description: "Simulates historical temperature deviations and models temporary volcanic aerosol cooling effects. Generates double-axis timeline Plotly plots.",
+    category: 'EDA',
+    notebookUrl: './notebooks/temperature_anomalies.ipynb',
+    tags: ["EDA", "Correlation", "Climate Analysis", "Plotly"],
+    date: '2026-06-28',
+    metrics: {
+     
+      "Time Span": "150 Years",
+      "Correlation Index": "-0.42",
+      "Anomalies Recorded": "150"
 
     }
   },
