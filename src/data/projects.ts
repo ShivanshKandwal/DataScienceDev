@@ -144,6 +144,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'lstm_sentiment',
+    title: "LSTM Text Sentiment Classifier",
+    description: "Trains a PyTorch Recurrent Neural Network (LSTM) with token embedding layers to categorize sentiment polarity of synthetic reviews.",
+    category: 'AI',
+    notebookUrl: './notebooks/lstm_sentiment.ipynb',
+    tags: ["PyTorch", "LSTM", "NLP", "Matplotlib"],
+    date: '2026-06-29',
+    metrics: {
+     
+      "Vocab Size": "30",
+      "Hidden Dim": "16",
+      "Accuracy": "95.0%"
+
+    }
+  },
+  {
     id: 'maze_qlearning',
     title: "Reinforcement Learning Q-Maze Solver",
     description: "Tabular Q-learning agent training in a stateful Gridworld maze environment. Visualizes cumulative episode rewards and the learned path arrow grid.",
@@ -176,6 +192,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'movie_recommender',
+    title: "Collaborative Filtering Movie Recommender",
+    description: "Implements user-based collaborative filtering from scratch using cosine similarities. Generates rating prediction heatmaps and recommendation bars.",
+    category: 'ML',
+    notebookUrl: './notebooks/movie_recommender.ipynb',
+    tags: ["Recommendation", "Collaborative Filtering", "Cosine Similarity", "Plotly"],
+    date: '2026-06-29',
+    metrics: {
+     
+      "User Count": "100",
+      "Movie Count": "20",
+      "Average Rating": "3.62"
+
+    }
+  },
+  {
     id: 'predictive_maintenance',
     title: "Predictive Maintenance XGBoost Classifier",
     description: "Trains a gradient boosting classifier to predict industrial machine failure modes from sensor logs. Analyzes feature importance scores.",
@@ -188,6 +220,22 @@ export const projectsData: ProjectData[] = [
       "ROC AUC": "0.868",
       "Accuracy": "92.0%",
       "Features": "6"
+
+    }
+  },
+  {
+    id: 'social_network_graph',
+    title: "Social Network Centrality & Link Prediction",
+    description: "Analyzes network structures using NetworkX. Computes degree/betweenness centralities and suggests friendships via Jaccard link predictions.",
+    category: 'EDA',
+    notebookUrl: './notebooks/social_network_graph.ipynb',
+    tags: ["NetworkX", "Graph Analysis", "Link Prediction", "Matplotlib"],
+    date: '2026-06-29',
+    metrics: {
+     
+      "Nodes (Users)": "45",
+      "Edges (Friendships)": "86",
+      "Avg Centrality": "0.09"
 
     }
   },
@@ -268,6 +316,22 @@ export const projectsData: ProjectData[] = [
       "Records": "891",
       "Features": "12",
       "Correlations": "0.78"
+
+    }
+  },
+  {
+    id: 'transfer_learning_resnet',
+    title: "Transfer Learning ResNet Image Classifier",
+    description: "Simulates transfer learning using a PyTorch classifier head on top of pre-extracted ResNet features. Plots training curves and prediction probability bars.",
+    category: 'AI',
+    notebookUrl: './notebooks/transfer_learning_resnet.ipynb',
+    tags: ["PyTorch", "Transfer Learning", "Image Classification", "Matplotlib"],
+    date: '2026-06-29',
+    metrics: {
+     
+      "Input Shape": "512 Features",
+      "Classes": "3",
+      "Accuracy": "88.5%"
 
     }
   }
