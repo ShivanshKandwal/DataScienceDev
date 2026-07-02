@@ -35,6 +35,11 @@ export default function App() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Sort projects by date (descending)
+  const sortedProjects = useMemo(() => {
+    return [...projectsData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }, []);
+
   // Update mouse position for spotlight cursor glow
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -743,26 +748,41 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-8"
+                className="space-y-12"
               >
                 {/* Visuals Intro Header */}
-                <div className="text-left max-w-2xl mb-8">
+                <div className="text-left max-w-2xl">
                   <h2 className="font-serif text-2xl md:text-3xl font-bold text-slate-800">
                     Data Visuals &amp; Dashboards
                   </h2>
                   <p className="text-slate-600 text-sm md:text-base mt-1">
-                    Exploratory analysis sandbox. Use the interactive correlation heatmap and click on projects below to study Jupyter findings.
+                    Exploratory analysis sandbox. Use the interactive correlation heatmap and browse projects below to study Jupyter findings.
                   </p>
                 </div>
 
+                {/* Top Row: Chart & Description */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                  {/* Left Column: Feature Correlation Heatmap (Grid Span 5) */}
-                  <div className="lg:col-span-5">
-                    <EChartsCard title="Feature Correlation Heatmap" option={correlationMatrixOption} height="350px" />
+                  <div className="lg:col-span-8">
+                    <EChartsCard title="Feature Correlation Heatmap" option={correlationMatrixOption} height="360px" />
                   </div>
-                  {/* Right Column: Visuals Catalog Ledger (Grid Span 7) */}
-                  <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {projectsData
+                  <div className="lg:col-span-4 glass-card rounded-3xl p-6 border border-black/5 bg-white/40 flex flex-col justify-center text-left">
+                    <h3 className="font-serif text-xl font-bold text-slate-800 mb-3">Dimensionality &amp; Associations</h3>
+                    <p className="text-slate-650 text-sm leading-relaxed mb-4">
+                      Feature engineering requires finding relationships between variables. This heatmap displays Pearson correlation coefficients across standard dataset attributes.
+                    </p>
+                    <div className="text-xs font-mono text-slate-400">
+                      * Colored bounds highlight positive/negative associations.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Row: Full Width Projects Grid */}
+                <div className="space-y-6">
+                  <div className="border-b border-slate-200/60 pb-3 text-left">
+                    <h3 className="font-serif text-2xl font-bold text-slate-800">Project Catalog</h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {sortedProjects
                       .filter((p) => p.category === 'EDA')
                       .map((project) => (
                         <ProjectCard 
@@ -784,26 +804,41 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-8"
+                className="space-y-12"
               >
                 {/* ML Intro Header */}
-                <div className="text-left max-w-2xl mb-8">
+                <div className="text-left max-w-2xl">
                   <h2 className="font-serif text-2xl md:text-3xl font-bold text-slate-800">
                     Machine Learning Models
                   </h2>
                   <p className="text-slate-600 text-sm md:text-base mt-1">
-                    Predictive regression modeling, feature imputations, and parameter searches. Study model benchmarks and click on projects below to view Jupyter outputs.
+                    Predictive regression modeling, feature imputations, and parameter searches. Study model benchmarks and browse projects below to view Jupyter outputs.
                   </p>
                 </div>
 
+                {/* Top Row: Chart & Description */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                  {/* Left Column: Benchmarks Chart (Grid Span 5) */}
-                  <div className="lg:col-span-5">
-                    <EChartsCard title="Model Performance Benchmarks" option={modelPerformanceChartOption} height="350px" />
+                  <div className="lg:col-span-8">
+                    <EChartsCard title="Model Performance Benchmarks" option={modelPerformanceChartOption} height="360px" />
                   </div>
-                  {/* Right Column: ML Ledger (Grid Span 7) */}
-                  <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {projectsData
+                  <div className="lg:col-span-4 glass-card rounded-3xl p-6 border border-black/5 bg-white/40 flex flex-col justify-center text-left">
+                    <h3 className="font-serif text-xl font-bold text-slate-800 mb-3">Benchmark Metrics</h3>
+                    <p className="text-slate-650 text-sm leading-relaxed mb-4">
+                      Comparing latency against overall precision scores across estimators. Trees models show high accuracy while maintaining quick inference speed.
+                    </p>
+                    <div className="text-xs font-mono text-slate-400">
+                      * Values represent cross-validated telemetry averages.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Row: Full Width Projects Grid */}
+                <div className="space-y-6">
+                  <div className="border-b border-slate-200/60 pb-3 text-left">
+                    <h3 className="font-serif text-2xl font-bold text-slate-800">Project Catalog</h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {sortedProjects
                       .filter((p) => p.category === 'ML')
                       .map((project) => (
                         <ProjectCard 
@@ -825,10 +860,10 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-8"
+                className="space-y-12"
               >
                 {/* AI Intro Header */}
-                <div className="text-left max-w-2xl mb-8">
+                <div className="text-left max-w-2xl">
                   <h2 className="font-serif text-2xl md:text-3xl font-bold text-slate-800">
                     Deep Learning &amp; Cognitive AI
                   </h2>
@@ -837,18 +872,33 @@ export default function App() {
                   </p>
                 </div>
 
+                {/* Top Row: Chart & Description */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                  {/* Left Column: Live CNN convergence ECharts (Grid Span 5) */}
-                  <div className="lg:col-span-5">
+                  <div className="lg:col-span-8">
                     <EChartsCard 
                       title="CNN Model Loss & Accuracy (Live Train Curve)" 
                       option={trainingChartOption} 
-                      height="260px"
+                      height="300px"
                     />
                   </div>
-                  {/* Right Column: AI Catalog Ledger (Grid Span 7) */}
-                  <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {projectsData
+                  <div className="lg:col-span-4 glass-card rounded-3xl p-6 border border-black/5 bg-white/40 flex flex-col justify-center text-left">
+                    <h3 className="font-serif text-xl font-bold text-slate-800 mb-3">Model Convergence</h3>
+                    <p className="text-slate-650 text-sm leading-relaxed mb-4">
+                      Real-time training diagnostics showing categorical cross-entropy loss decaying while validation metrics scale up towards convergence.
+                    </p>
+                    <div className="text-xs font-mono text-slate-400">
+                      * Tracks dynamic feedforward parameter weights.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Row: Full Width Projects Grid */}
+                <div className="space-y-6">
+                  <div className="border-b border-slate-200/60 pb-3 text-left">
+                    <h3 className="font-serif text-2xl font-bold text-slate-800">Project Catalog</h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {sortedProjects
                       .filter((p) => p.category === 'AI')
                       .map((project) => (
                         <ProjectCard 

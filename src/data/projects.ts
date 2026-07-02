@@ -29,6 +29,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'autoencoder_anomaly',
+    title: "Autoencoder Anomaly Detection Pipeline",
+    description: "Builds a PyTorch Autoencoder to reconstruct normal sensor telemetry. Pinpoints anomalous spikes based on reconstruction loss thresholds.",
+    category: 'AI',
+    notebookUrl: './notebooks/autoencoder_anomaly.ipynb',
+    tags: ["PyTorch", "Autoencoder", "Anomaly Detection", "Matplotlib"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "Input Size": "64",
+      "Latent Dim": "8",
+      "Precision": "91.2%"
+
+    }
+  },
+  {
     id: 'brain_tumor_segment',
     title: "Brain Tumor MRI Segmentation U-Net",
     description: "Pixel-level segmentation of MRI scans using a custom PyTorch U-Net architecture. Employs dice loss coefficient optimizations and data augmentation matrices.",
@@ -42,6 +58,22 @@ export const projectsData: ProjectData[] = [
       "IoU Acc": "96.8%",
       "Dice Coeff": "0.942",
       "Epochs": "120"
+
+    }
+  },
+  {
+    id: 'clv_prediction',
+    title: "Customer Lifetime Value (CLV) Prediction",
+    description: "Predicts customer lifetime valuations using regularized linear estimators. Analyzes buying frequency and relationship tenure weights.",
+    category: 'ML',
+    notebookUrl: './notebooks/clv_prediction.ipynb',
+    tags: ["Scikit-Learn", "Regression", "CLV", "Plotly"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "R\u00b2 Score": "0.834",
+      "MAE": "$1.64k",
+      "Dataset Size": "1200"
 
     }
   },
@@ -94,6 +126,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'gan_1d',
+    title: "Generative Adversarial Network (GAN) 1D Learning",
+    description: "Builds Generator and Discriminator neural networks in PyTorch to replicate 1D distributions. Compares real vs generated density curves.",
+    category: 'AI',
+    notebookUrl: './notebooks/gan_1d.ipynb',
+    tags: ["GAN", "PyTorch", "Generative AI", "Matplotlib"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "Gen Layers": "3",
+      "Disc Layers": "3",
+      "Epochs": "50"
+
+    }
+  },
+  {
     id: 'house_valuation',
     title: "House Valuation Regression Modeling",
     description: "Evaluates property prices using Ridge Regression and Random Forest. Performs feature scaling, handles multicollinearity, and visualizes residuals using interactive Plotly scatter plots.",
@@ -140,6 +188,22 @@ export const projectsData: ProjectData[] = [
       "Clusters": "3",
       "PCA Variance": "92.4%",
       "Samples": "150"
+
+    }
+  },
+  {
+    id: 'knn_classification',
+    title: "KNN Classifier & Optimal K Selection",
+    description: "Trains a K-Nearest Neighbors classifier to estimate diagnostic risks. Visualizes cross-validation accuracy bounds across neighbor parameters.",
+    category: 'ML',
+    notebookUrl: './notebooks/knn_classification.ipynb',
+    tags: ["Scikit-Learn", "KNN", "Classification", "Matplotlib"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "Accuracy": "80.0%",
+      "Neighbors K": "9",
+      "Dimensions": "4"
 
     }
   },

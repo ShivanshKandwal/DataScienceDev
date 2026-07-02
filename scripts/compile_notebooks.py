@@ -7,6 +7,21 @@ import base64
 import traceback
 import yaml
 
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        try:
+            import numpy as np
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+            if isinstance(obj, (np.void, np.integer, np.floating)):
+                return obj.item()
+            import pandas as pd
+            if isinstance(obj, pd.Index):
+                return obj.tolist()
+        except ImportError:
+            pass
+        return super(NumpyEncoder, self).default(obj)
+
 # Set matplotlib backend to a non-interactive one (Agg) to prevent GUI windows from opening and blocking
 try:
     import matplotlib
@@ -280,7 +295,7 @@ def compile_script_to_notebook(script_path, output_dir):
     filename = os.path.splitext(os.path.basename(script_path))[0]
     output_path = os.path.join(output_dir, f"{filename}.ipynb")
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(notebook, f, indent=1)
+        json.dump(notebook, f, cls=NumpyEncoder, indent=1)
         
     print(f"Successfully compiled {script_path} -> {output_path}")
     return metadata, filename
