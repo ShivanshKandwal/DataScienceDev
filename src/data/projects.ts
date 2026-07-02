@@ -78,6 +78,38 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'cohort_retention',
+    title: "Customer Cohort Retention Heatmap Analysis",
+    description: "Analyzes user signups and retention trends across monthly cohorts. Generates SaaS retention decay heatmaps using Seaborn.",
+    category: 'EDA',
+    notebookUrl: './notebooks/cohort_retention.ipynb',
+    tags: ["EDA", "SaaS", "Cohort Analysis", "Seaborn"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "User Cohorts": "12 Months",
+      "Total Users": "4500",
+      "Month-12 Avg": "24.2%"
+
+    }
+  },
+  {
+    id: 'color_quantization',
+    title: "K-Means Image Color Quantization",
+    description: "Compresses color dimensions of simulated RGB arrays using K-Means clustering. Compares original vs quantized representations.",
+    category: 'ML',
+    notebookUrl: './notebooks/color_quantization.ipynb',
+    tags: ["Scikit-Learn", "K-Means", "Quantization", "Matplotlib"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "Cluster Counts": "16, 8, 4",
+      "Image Dimensions": "64x64x3",
+      "Quantized MSE": "0.012"
+
+    }
+  },
+  {
     id: 'customer_churn',
     title: "Customer Churn Prediction Model",
     description: "Supervised binary classification model predicting customer churn probabilities using Scikit-Learn Random Forest. Plots ROC curve benchmarks.",
@@ -110,6 +142,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'flight_routes',
+    title: "Global Flight Path Connections Map",
+    description: "Models flight networks across global coordinates. Renders 3D orthographic globe connections using Plotly Scattergeo.",
+    category: 'EDA',
+    notebookUrl: './notebooks/flight_routes.ipynb',
+    tags: ["EDA", "Geospatial", "Network Graph", "Plotly"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "Route Count": "12",
+      "Cities Connected": "6",
+      "Max Range": "12k km"
+
+    }
+  },
+  {
     id: 'fraud_detection',
     title: "Credit Card Fraud Detection",
     description: "Supervised anomaly detection on highly imbalanced transaction manifests. Implements cost-sensitive Random Forest classifiers and Precision-Recall curve benchmarks.",
@@ -122,6 +170,38 @@ export const projectsData: ProjectData[] = [
       "Fraud Rate": "0.8%",
       "PR-AUC": "0.862",
       "Recall@90%Prec": "82.4%"
+
+    }
+  },
+  {
+    id: 'funnel_analysis',
+    title: "Web Clickstream Funnel Conversion Analysis",
+    description: "Models user journeys and conversion funnel decay rates from web log sequences. Builds interactive Plotly funnels.",
+    category: 'EDA',
+    notebookUrl: './notebooks/funnel_analysis.ipynb',
+    tags: ["EDA", "Clickstream", "Conversion Funnel", "Plotly"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "Funnel Steps": "4",
+      "Conversion Rate": "3.2%",
+      "Session Count": "10k"
+
+    }
+  },
+  {
+    id: 'game_of_life',
+    title: "Conway's Game of Life Cellular Automata",
+    description: "Simulates Conway's Game of Life on a 50x50 grid. Tracks structural transformations (gliders, blinkers) over generations.",
+    category: 'EDA',
+    notebookUrl: './notebooks/game_of_life.ipynb',
+    tags: ["Simulation", "Cellular Automata", "Data Visualization", "Matplotlib"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "Grid Size": "50x50",
+      "Generations": "50",
+      "Structures": "Gliders"
 
     }
   },
@@ -332,6 +412,22 @@ export const projectsData: ProjectData[] = [
       "Accuracy": "94.5%",
       "Support Vectors": "84",
       "Kernels Tested": "3"
+
+    }
+  },
+  {
+    id: 'taxi_qlearning',
+    title: "Q-Learning Taxi Navigation Solver",
+    description: "Trains a tabular Q-learning reinforcement learning agent to route a taxi in a 5x5 grid world to pick up and drop off riders.",
+    category: 'AI',
+    notebookUrl: './notebooks/taxi_qlearning.ipynb',
+    tags: ["Q-Learning", "Reinforcement Learning", "Grid World", "Matplotlib"],
+    date: '2026-07-02',
+    metrics: {
+     
+      "State Space": "125",
+      "Action Space": "6",
+      "Convergence Ep": "150"
 
     }
   },
