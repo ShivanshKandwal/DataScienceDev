@@ -45,6 +45,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'bi_lstm_returns',
+    title: "Bidirectional LSTM Sequence Return Forecaster",
+    description: "Trains a Bidirectional LSTM in PyTorch to forecast sequential asset returns. Compares actual test signals against prediction bounds.",
+    category: 'AI',
+    notebookUrl: './notebooks/bi_lstm_returns.ipynb',
+    tags: ["PyTorch", "LSTM", "Bidirectional", "Matplotlib"],
+    date: '2026-07-03',
+    metrics: {
+     
+      "Hidden Size": "32",
+      "Sequence Length": "10",
+      "Test Loss (MSE)": "0.024"
+
+    }
+  },
+  {
     id: 'brain_tumor_segment',
     title: "Brain Tumor MRI Segmentation U-Net",
     description: "Pixel-level segmentation of MRI scans using a custom PyTorch U-Net architecture. Employs dice loss coefficient optimizations and data augmentation matrices.",
@@ -122,6 +138,22 @@ export const projectsData: ProjectData[] = [
       "ROC AUC": "0.892",
       "F1-Score": "0.845",
       "Accuracy": "87.2%"
+
+    }
+  },
+  {
+    id: 'decision_tree',
+    title: "Decision Tree Classification & Overfitting Boundaries",
+    description: "Trains Decision Tree classifiers to map non-linear spaces. Compares boundary complexity and overfitting limits across tree depth bounds.",
+    category: 'ML',
+    notebookUrl: './notebooks/decision_tree.ipynb',
+    tags: ["Scikit-Learn", "Decision Tree", "Classification", "Matplotlib"],
+    date: '2026-07-03',
+    metrics: {
+     
+      "Max Depth": "2, 4, None",
+      "Features": "2",
+      "Accuracy": "89.2%"
 
     }
   },
@@ -368,6 +400,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'reinforce_cartpole',
+    title: "Policy Gradient REINFORCE Agent Simulator",
+    description: "Trains a Policy Gradient (REINFORCE) reinforcement learning agent in PyTorch to stabilize a simplified cartpole. Plots reward progression.",
+    category: 'AI',
+    notebookUrl: './notebooks/reinforce_cartpole.ipynb',
+    tags: ["PyTorch", "Policy Gradient", "REINFORCE", "Matplotlib"],
+    date: '2026-07-03',
+    metrics: {
+     
+      "State Dim": "4",
+      "Action Dim": "2",
+      "Convergence Ep": "180"
+
+    }
+  },
+  {
     id: 'social_network_graph',
     title: "Social Network Centrality & Link Prediction",
     description: "Analyzes network structures using NetworkX. Computes degree/betweenness centralities and suggests friendships via Jaccard link predictions.",
@@ -492,6 +540,22 @@ export const projectsData: ProjectData[] = [
       "Input Shape": "512 Features",
       "Classes": "3",
       "Accuracy": "88.5%"
+
+    }
+  },
+  {
+    id: 'vae_latent',
+    title: "Variational Autoencoder (VAE) Latent Clustering",
+    description: "Builds a Variational Autoencoder (VAE) in PyTorch to map digit representations to a 2D latent space. Visualizes clustered latent regions.",
+    category: 'AI',
+    notebookUrl: './notebooks/vae_latent.ipynb',
+    tags: ["PyTorch", "VAE", "Generative AI", "Matplotlib"],
+    date: '2026-07-03',
+    metrics: {
+     
+      "Latent Dim": "2",
+      "Loss (ELBO)": "42.15",
+      "Batch Size": "64"
 
     }
   }
