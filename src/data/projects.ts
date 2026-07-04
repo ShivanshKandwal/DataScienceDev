@@ -13,6 +13,22 @@ export interface ProjectData {
 
 export const projectsData: ProjectData[] = [
   {
+    id: 'a2c_cartpole',
+    title: "Advantage Actor-Critic (A2C) Agent Simulator",
+    description: "Trains an Advantage Actor-Critic (A2C) agent in PyTorch to stabilize a simplified cartpole. Charts convergence progression.",
+    category: 'AI',
+    notebookUrl: './notebooks/a2c_cartpole.ipynb',
+    tags: ["PyTorch", "Actor-Critic", "A2C", "Matplotlib"],
+    date: '2026-07-04',
+    metrics: {
+     
+      "Actor Layers": "2",
+      "Critic Layers": "2",
+      "Convergence Ep": "160"
+
+    }
+  },
+  {
     id: 'air_quality_decomposition',
     title: "Air Quality Time-Series & Seasonal Decomposition",
     description: "Simulates daily air quality indices and performs classical additive seasonal trend decomposition, profiling monthly variation boxplots.",
@@ -122,6 +138,22 @@ export const projectsData: ProjectData[] = [
       "Cluster Counts": "16, 8, 4",
       "Image Dimensions": "64x64x3",
       "Quantized MSE": "0.012"
+
+    }
+  },
+  {
+    id: 'continuous_a2c',
+    title: "Continuous Action Space A2C Tracking Agent",
+    description: "Trains a continuous Gaussian A2C reinforcement learning agent to hold coordinate targets in a 1D physics sandbox. Charts tracking errors.",
+    category: 'AI',
+    notebookUrl: './notebooks/continuous_a2c.ipynb',
+    tags: ["PyTorch", "A2C", "Continuous Control", "Matplotlib"],
+    date: '2026-07-04',
+    metrics: {
+     
+      "State Dim": "2",
+      "Latent Hidden": "32",
+      "Convergence Ep": "150"
 
     }
   },
@@ -304,6 +336,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'isolation_forest',
+    title: "Isolation Forest Anomaly & Outlier Mapping",
+    description: "Constructs an Isolation Forest estimator to identify structural anomalies. Visualizes coordinate outliers and score contour gradients.",
+    category: 'ML',
+    notebookUrl: './notebooks/isolation_forest.ipynb',
+    tags: ["Scikit-Learn", "Isolation Forest", "Anomaly Detection", "Matplotlib"],
+    date: '2026-07-04',
+    metrics: {
+     
+      "Inlier Count": "350",
+      "Outlier Count": "50",
+      "Accuracy (F1)": "90.4%"
+
+    }
+  },
+  {
     id: 'knn_classification',
     title: "KNN Classifier & Optimal K Selection",
     description: "Trains a K-Nearest Neighbors classifier to estimate diagnostic risks. Visualizes cross-validation accuracy bounds across neighbor parameters.",
@@ -380,6 +428,38 @@ export const projectsData: ProjectData[] = [
       "User Count": "100",
       "Movie Count": "20",
       "Average Rating": "3.62"
+
+    }
+  },
+  {
+    id: 'pca_reduction',
+    title: "Principal Component Analysis (PCA) Dimension Reduction",
+    description: "Decomposes 4D feature vectors into 2 principal components. Maps class separations and evaluates cumulative explained variances.",
+    category: 'ML',
+    notebookUrl: './notebooks/pca_reduction.ipynb',
+    tags: ["Scikit-Learn", "PCA", "Dimensionality Reduction", "Matplotlib"],
+    date: '2026-07-04',
+    metrics: {
+     
+      "Input Dim": "4",
+      "Reduced Dim": "2",
+      "Explained Var": "91.6%"
+
+    }
+  },
+  {
+    id: 'population_pyramid',
+    title: "Demographic Population Pyramid Analysis",
+    description: "Models demographic distributions split by age cohorts and gender. Generates mirrored horizontal bar charts using Plotly.",
+    category: 'EDA',
+    notebookUrl: './notebooks/population_pyramid.ipynb',
+    tags: ["EDA", "Demographics", "Population Pyramid", "Plotly"],
+    date: '2026-07-04',
+    metrics: {
+     
+      "Age Groups": "10",
+      "Cohort Width": "10 Years",
+      "Total Pop": "100k"
 
     }
   },
@@ -556,6 +636,22 @@ export const projectsData: ProjectData[] = [
       "Latent Dim": "2",
       "Loss (ELBO)": "42.15",
       "Batch Size": "64"
+
+    }
+  },
+  {
+    id: 'violin_distributions',
+    title: "Multi-Group Violin Probability Density Analysis",
+    description: "Models probability density profiles across categorical groups. Generates annotated multi-group Violin plots using Seaborn.",
+    category: 'EDA',
+    notebookUrl: './notebooks/violin_distributions.ipynb',
+    tags: ["EDA", "Statistical Visualization", "Violin Plot", "Seaborn"],
+    date: '2026-07-04',
+    metrics: {
+     
+      "Target Groups": "4",
+      "Sample Size": "800",
+      "Width Parameter": "0.8"
 
     }
   }
