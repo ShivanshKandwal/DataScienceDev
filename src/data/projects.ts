@@ -29,6 +29,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'adaboost_regression',
+    title: "AdaBoost Ensemble Regressor Predictions",
+    description: "Fits boosting ensemble models to resolve noisy non-linear functions. Compares base vs. AdaBoost predictions in Matplotlib.",
+    category: 'ML',
+    notebookUrl: './notebooks/adaboost_regression.ipynb',
+    tags: ["Scikit-Learn", "AdaBoost", "Ensemble", "Matplotlib"],
+    date: '2026-07-05',
+    metrics: {
+     
+      "Base Estimators": "50",
+      "Learning Rate": "0.1",
+      "R\u00b2 Score": "0.934"
+
+    }
+  },
+  {
     id: 'air_quality_decomposition',
     title: "Air Quality Time-Series & Seasonal Decomposition",
     description: "Simulates daily air quality indices and performs classical additive seasonal trend decomposition, profiling monthly variation boxplots.",
@@ -41,6 +57,22 @@ export const projectsData: ProjectData[] = [
       "Days Analyzed": "1095",
       "Monthly Peak": "142.5",
       "Trend Coefficient": "+2.4 / yr"
+
+    }
+  },
+  {
+    id: 'athlete_radar',
+    title: "Athlete Multi-Dimensional Attribute Radar Profiles",
+    description: "Maps multivariate athlete performance attributes. Builds filled polar radar chart overlays using Plotly.",
+    category: 'EDA',
+    notebookUrl: './notebooks/athlete_radar.ipynb',
+    tags: ["EDA", "Multivariate Analysis", "Radar Chart", "Plotly"],
+    date: '2026-07-05',
+    metrics: {
+     
+      "Dimensions": "6",
+      "Profiles Compared": "2",
+      "Performance Index": "0-100"
 
     }
   },
@@ -286,6 +318,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'global_gdp_bubble',
+    title: "GDP vs. Life Expectancy Global Bubble Analysis",
+    description: "Models global health and wealth indicators. Renders Gapminder-style interactive bubble charts using Plotly.",
+    category: 'EDA',
+    notebookUrl: './notebooks/global_gdp_bubble.ipynb',
+    tags: ["EDA", "Global Metrics", "Bubble Chart", "Plotly"],
+    date: '2026-07-05',
+    metrics: {
+     
+      "Countries": "150",
+      "Indicators": "GDP, Life Exp",
+      "Year Reference": "2025"
+
+    }
+  },
+  {
     id: 'house_valuation',
     title: "House Valuation Regression Modeling",
     description: "Evaluates property prices using Ridge Regression and Random Forest. Performs feature scaling, handles multicollinearity, and visualizes residuals using interactive Plotly scatter plots.",
@@ -480,6 +528,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'q_cartpole',
+    title: "Tabular Q-Learning Discretized CartPole Balancer",
+    description: "Trains a tabular Q-learning agent on discretized 4D states to stabilize a cartpole simulator. Charts convergence rewards.",
+    category: 'AI',
+    notebookUrl: './notebooks/q_cartpole.ipynb',
+    tags: ["Q-Learning", "Discretization", "Reinforcement Learning", "Matplotlib"],
+    date: '2026-07-05',
+    metrics: {
+     
+      "State Bins": "162",
+      "Action Space": "2",
+      "Convergence Ep": "200"
+
+    }
+  },
+  {
     id: 'reinforce_cartpole',
     title: "Policy Gradient REINFORCE Agent Simulator",
     description: "Trains a Policy Gradient (REINFORCE) reinforcement learning agent in PyTorch to stabilize a simplified cartpole. Plots reward progression.",
@@ -508,6 +572,22 @@ export const projectsData: ProjectData[] = [
       "Nodes (Users)": "45",
       "Edges (Friendships)": "86",
       "Avg Centrality": "0.09"
+
+    }
+  },
+  {
+    id: 'spectral_clustering',
+    title: "Spectral Clustering Graph Partitioning Bounds",
+    description: "Applies Spectral Clustering to partition complex concentric geometric structures. Compares K-Means vs Spectral results in Matplotlib.",
+    category: 'ML',
+    notebookUrl: './notebooks/spectral_clustering.ipynb',
+    tags: ["Scikit-Learn", "Spectral Clustering", "Unsupervised", "Matplotlib"],
+    date: '2026-07-05',
+    metrics: {
+     
+      "Target Clusters": "2",
+      "Sample Size": "400",
+      "Gamma Parameter": "15.0"
 
     }
   },
