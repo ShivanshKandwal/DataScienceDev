@@ -190,6 +190,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'correlation_heatmap',
+    title: "Statistical Correlation Matrix Heatmap",
+    description: "Models Pearson correlation matrices across synthetic variables. Renders annotated correlation heatmaps using Seaborn.",
+    category: 'EDA',
+    notebookUrl: './notebooks/correlation_heatmap.ipynb',
+    tags: ["EDA", "Correlation Matrix", "Heatmap", "Seaborn"],
+    date: '2026-07-06',
+    metrics: {
+     
+      "Features": "6",
+      "Sample Size": "500",
+      "Max Correlation": "0.85"
+
+    }
+  },
+  {
     id: 'customer_churn',
     title: "Customer Churn Prediction Model",
     description: "Supervised binary classification model predicting customer churn probabilities using Scikit-Learn Random Forest. Plots ROC curve benchmarks.",
@@ -234,6 +250,22 @@ export const projectsData: ProjectData[] = [
       "State Space": "4",
       "Action Space": "2",
       "Avg Reward": "185.4"
+
+    }
+  },
+  {
+    id: 'dqn_target_network',
+    title: "Target Network DQN CartPole Balancer",
+    description: "Implements a Deep Q-Network (DQN) with a periodic target network update in PyTorch to stabilize a cartpole. Charts reward convergence.",
+    category: 'AI',
+    notebookUrl: './notebooks/dqn_target_network.ipynb',
+    tags: ["PyTorch", "DQN", "Target Network", "Matplotlib"],
+    date: '2026-07-06',
+    metrics: {
+     
+      "State Dim": "4",
+      "Replay Size": "1000",
+      "Convergence Ep": "100"
 
     }
   },
@@ -432,6 +464,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'lstm_text_generation',
+    title: "Character-Level LSTM Generative Text Pipeline",
+    description: "Trains a character-level LSTM generator in PyTorch on a text corpus. Evaluates convergence cross-entropy decay curve logs.",
+    category: 'AI',
+    notebookUrl: './notebooks/lstm_text_generation.ipynb',
+    tags: ["PyTorch", "LSTM", "Generative AI", "NLP", "Matplotlib"],
+    date: '2026-07-06',
+    metrics: {
+     
+      "Vocabulary Size": "28",
+      "Hidden Units": "64",
+      "Final Loss": "0.04"
+
+    }
+  },
+  {
     id: 'maze_qlearning',
     title: "Reinforcement Learning Q-Maze Solver",
     description: "Tabular Q-learning agent training in a stateful Gridworld maze environment. Visualizes cumulative episode rewards and the learned path arrow grid.",
@@ -476,6 +524,22 @@ export const projectsData: ProjectData[] = [
       "User Count": "100",
       "Movie Count": "20",
       "Average Rating": "3.62"
+
+    }
+  },
+  {
+    id: 'naive_bayes_text',
+    title: "Naive Bayes Text Likelihood Classification",
+    description: "Trains a Multinomial Naive Bayes text classifier on synthetic vocabulary bag-of-words. Visualizes likelihood feature parameters.",
+    category: 'ML',
+    notebookUrl: './notebooks/naive_bayes_text.ipynb',
+    tags: ["Scikit-Learn", "Naive Bayes", "Classification", "NLP", "Matplotlib"],
+    date: '2026-07-06',
+    metrics: {
+     
+      "Vocabulary Size": "100",
+      "Accuracy": "100.0%",
+      "Review Count": "400"
 
     }
   },
@@ -556,6 +620,22 @@ export const projectsData: ProjectData[] = [
       "State Dim": "4",
       "Action Dim": "2",
       "Convergence Ep": "180"
+
+    }
+  },
+  {
+    id: 'silhouette_analysis',
+    title: "K-Means Clustering & Silhouette Analysis",
+    description: "Applies K-Means clustering to synthetic blob coordinates. Evaluates optimal cluster counts using Silhouette metrics.",
+    category: 'ML',
+    notebookUrl: './notebooks/silhouette_analysis.ipynb',
+    tags: ["Scikit-Learn", "K-Means", "Clustering", "Silhouette Score", "Matplotlib"],
+    date: '2026-07-06',
+    metrics: {
+     
+      "Target Clusters": "3",
+      "Silhouette Score": "0.793",
+      "Bins Count": "2-8"
 
     }
   },
