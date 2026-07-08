@@ -29,6 +29,38 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'a2c_continuous_control',
+    title: "A2C Continuous Control Target Positioner",
+    description: "Configures continuous controls using Gaussian output coordinate dimensions to hold vector targets in PyTorch.",
+    category: 'AI',
+    notebookUrl: './notebooks/a2c_continuous_control.ipynb',
+    tags: ["PyTorch", "A2C", "Continuous Control", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "State Vector Size": "4",
+      "Action Output Size": "2",
+      "Convergence Ep": "160"
+
+    }
+  },
+  {
+    id: 'a2c_taxi_navigation',
+    title: "A2C Gridworld Taxi Navigation Policy",
+    description: "Upgrades tabular taxi agents to neural Actor-Critic approximation models in PyTorch.",
+    category: 'AI',
+    notebookUrl: './notebooks/a2c_taxi_navigation.ipynb',
+    tags: ["PyTorch", "A2C", "Gridworld Navigation", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "State Dim": "2",
+      "Hidden Layers": "2",
+      "Convergence Ep": "140"
+
+    }
+  },
+  {
     id: 'adaboost_regression',
     title: "AdaBoost Ensemble Regressor Predictions",
     description: "Fits boosting ensemble models to resolve noisy non-linear functions. Compares base vs. AdaBoost predictions in Matplotlib.",
@@ -154,6 +186,22 @@ export const projectsData: ProjectData[] = [
       "R\u00b2 Score": "0.834",
       "MAE": "$1.64k",
       "Dataset Size": "1200"
+
+    }
+  },
+  {
+    id: 'cnn_1d_ecg',
+    title: "1D CNN ECG Sequence Classifier",
+    description: "Implements a 1D CNN containing pooling layers to identify cardiac anomalies in ECG sequences.",
+    category: 'AI',
+    notebookUrl: './notebooks/cnn_1d_ecg.ipynb',
+    tags: ["PyTorch", "1D CNN", "ECG Analysis", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Channels": "1",
+      "Kernel Width": "5",
+      "Anomaly Recall": "100.0%"
 
     }
   },
@@ -318,6 +366,38 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'denoising_autoencoder',
+    title: "Denoising Autoencoder Pattern Restorer",
+    description: "Adds Gaussian noise to synthetic pixel arrays and trains deep autoencoders to reconstruct clean image grids.",
+    category: 'AI',
+    notebookUrl: './notebooks/denoising_autoencoder.ipynb',
+    tags: ["PyTorch", "Denoising Autoencoder", "Image Compression", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Input Dimensions": "64",
+      "Latent Dimensions": "8",
+      "Noise Scale": "0.25"
+
+    }
+  },
+  {
+    id: 'double_dqn_learning',
+    title: "DQN with Double Q-Learning (Double DQN)",
+    description: "Implements Double DQN in PyTorch, decoupling actions selection from targets calculation.",
+    category: 'AI',
+    notebookUrl: './notebooks/double_dqn_learning.ipynb',
+    tags: ["Double DQN", "Reinforcement Learning", "Target Stability", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "States Bins": "4",
+      "Actions": "2",
+      "Convergence Ep": "80"
+
+    }
+  },
+  {
     id: 'dqn_cartpole',
     title: "Deep Q-Network (DQN) CartPole Simulation",
     description: "Implements a custom CartPole reinforcement learning physics simulator and trains a PyTorch DQN agent with experience replay and target networks.",
@@ -334,6 +414,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'dqn_prioritized_replay',
+    title: "DQN with Prioritized Experience Replay",
+    description: "Modifies DQN replay queues to sample transitions scaled by absolute temporal difference (TD) errors in PyTorch.",
+    category: 'AI',
+    notebookUrl: './notebooks/dqn_prioritized_replay.ipynb',
+    tags: ["DQN", "Prioritized Replay", "Reinforcement Learning", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Replay Size": "1000",
+      "Priority Weight": "0.6",
+      "Convergence Ep": "90"
+
+    }
+  },
+  {
     id: 'dqn_target_network',
     title: "Target Network DQN CartPole Balancer",
     description: "Implements a Deep Q-Network (DQN) with a periodic target network update in PyTorch to stabilize a cartpole. Charts reward convergence.",
@@ -346,6 +442,22 @@ export const projectsData: ProjectData[] = [
       "State Dim": "4",
       "Replay Size": "1000",
       "Convergence Ep": "100"
+
+    }
+  },
+  {
+    id: 'dueling_dqn_learning',
+    title: "DQN Dueling Architecture (Dueling DQN)",
+    description: "Splits network heads to approximate State-Value V(s) and Action-Advantage A(s,a) streams independently.",
+    category: 'AI',
+    notebookUrl: './notebooks/dueling_dqn_learning.ipynb',
+    tags: ["Dueling DQN", "DQN", "Reinforcement Learning", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Value Layers": "2",
+      "Advantage Layers": "2",
+      "Convergence Ep": "85"
 
     }
   },
@@ -462,6 +574,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'gan_grid_pattern',
+    title: "GAN 2D Grid Pattern Synthesizer",
+    description: "Trains Generator/Discriminator modules to construct synthetic 2D grid coordinates.",
+    category: 'AI',
+    notebookUrl: './notebooks/gan_grid_pattern.ipynb',
+    tags: ["GAN", "PyTorch", "Generative AI", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Generator Layers": "3",
+      "Discriminator Layers": "3",
+      "Epochs": "80"
+
+    }
+  },
+  {
     id: 'global_earthquakes',
     title: "Global Earthquakes Scatterglobe Visualization",
     description: "Parses historical earthquake coordinates and plots magnitudes/depths onto a 3D spinning Scattergeo globe.",
@@ -522,6 +650,22 @@ export const projectsData: ProjectData[] = [
       "Trees Count": "100",
       "Max Depth": "5",
       "Accuracy": "86.9%"
+
+    }
+  },
+  {
+    id: 'gru_forecaster',
+    title: "GRU Sequential Sensor Forecaster",
+    description: "Builds a Gated Recurrent Unit (GRU) model in PyTorch to forecast sequential time-series sensor metrics.",
+    category: 'AI',
+    notebookUrl: './notebooks/gru_forecaster.ipynb',
+    tags: ["PyTorch", "GRU", "Sequence Forecasting", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Sequence Length": "15",
+      "Hidden Size": "32",
+      "Test Loss (MSE)": "0.232"
 
     }
   },
@@ -672,6 +816,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'lstm_seq2seq_autoencoder',
+    title: "LSTM Sequence-to-Sequence Autoencoder",
+    description: "Builds an LSTM-based sequence-to-sequence autoencoder in PyTorch to reconstruct variable-length time-series curves.",
+    category: 'AI',
+    notebookUrl: './notebooks/lstm_seq2seq_autoencoder.ipynb',
+    tags: ["PyTorch", "LSTM Autoencoder", "Sequence Modeling", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Encoder LSTM Layers": "1",
+      "Latent Dimension": "16",
+      "Reconstruction MSE": "0.047"
+
+    }
+  },
+  {
     id: 'lstm_text_generation',
     title: "Character-Level LSTM Generative Text Pipeline",
     description: "Trains a character-level LSTM generator in PyTorch on a text corpus. Evaluates convergence cross-entropy decay curve logs.",
@@ -716,6 +876,22 @@ export const projectsData: ProjectData[] = [
       "Grid World": "6x6",
       "Episodes": "300",
       "Path Steps": "10"
+
+    }
+  },
+  {
+    id: 'mlp_credit_risk',
+    title: "MLP Credit Risk Classifier Pipeline",
+    description: "Builds a multi-layer feedforward network with Batch Normalization to predict credit risk.",
+    category: 'AI',
+    notebookUrl: './notebooks/mlp_credit_risk.ipynb',
+    tags: ["PyTorch", "MLP", "Batch Normalization", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Layer Dimensions": "32-16-1",
+      "Dropout Ratio": "0.2",
+      "Accuracy": "71.9%"
 
     }
   },
@@ -928,6 +1104,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'rbf_network_approximator',
+    title: "Radial Basis Function Approximator Network",
+    description: "Trains a custom PyTorch layer evaluating Gaussian radial basis coordinates to interpolate complex curves.",
+    category: 'AI',
+    notebookUrl: './notebooks/rbf_network_approximator.ipynb',
+    tags: ["PyTorch", "RBF Layer", "Function Approximation", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Centroids count": "10",
+      "Variance Metric": "Gamma",
+      "Test R\u00b2": "0.985"
+
+    }
+  },
+  {
     id: 'real_estate_choropleth',
     title: "Real Estate Price Index Geo-Choropleth Map",
     description: "Maps state-level real estate valuation variations using regional choropleth US boundary projections.",
@@ -1040,6 +1232,22 @@ export const projectsData: ProjectData[] = [
     }
   },
   {
+    id: 'siamese_distance_learner',
+    title: "Siamese Metric Learner Contrastive Network",
+    description: "Trains Siamese twin networks using Contrastive Loss to estimate feature distances between similar/dissimilar samples in PyTorch.",
+    category: 'AI',
+    notebookUrl: './notebooks/siamese_distance_learner.ipynb',
+    tags: ["PyTorch", "Siamese Network", "Contrastive Loss", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Input Dimensions": "16",
+      "Latent Dimensions": "4",
+      "Accuracy": "94.2%"
+
+    }
+  },
+  {
     id: 'silhouette_analysis',
     title: "K-Means Clustering & Silhouette Analysis",
     description: "Applies K-Means clustering to synthetic blob coordinates. Evaluates optimal cluster counts using Silhouette metrics.",
@@ -1116,6 +1324,22 @@ export const projectsData: ProjectData[] = [
       "Test Groups": "5",
       "Student Count": "1200",
       "Outlier Ratio": "1.75%"
+
+    }
+  },
+  {
+    id: 'style_transfer_optimizer',
+    title: "Neural Style Transfer Matrix Optimizer",
+    description: "Implements feature representations loss optimization between a content array, a style array, and a target array.",
+    category: 'AI',
+    notebookUrl: './notebooks/style_transfer_optimizer.ipynb',
+    tags: ["Generative AI", "Optimization Loop", "Neural Style Transfer", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Target Matrix Size": "32x32",
+      "Loss Weight Style": "10^3",
+      "Epochs Count": "60"
 
     }
   },
@@ -1276,6 +1500,22 @@ export const projectsData: ProjectData[] = [
       "Input Shape": "512 Features",
       "Classes": "3",
       "Accuracy": "88.5%"
+
+    }
+  },
+  {
+    id: 'transformer_char_classifier',
+    title: "Transformer Encoder Character sequence Classifier",
+    description: "Builds a transformer encoder model featuring multi-head self-attention to classify character sequences.",
+    category: 'AI',
+    notebookUrl: './notebooks/transformer_char_classifier.ipynb',
+    tags: ["Transformer", "Attention Mechanism", "NLP", "Matplotlib"],
+    date: '2026-07-08',
+    metrics: {
+     
+      "Attention Heads": "4",
+      "Encoder Layers": "2",
+      "Accuracy": "98.3%"
 
     }
   },
