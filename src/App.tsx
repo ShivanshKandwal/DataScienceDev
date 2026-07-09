@@ -10,6 +10,7 @@ import { ProjectCard } from './components/ProjectCard';
 import { NotebookViewer } from './components/NotebookViewer';
 import { GradientDescent } from './components/GradientDescent';
 import { TelemetryDashboard } from './components/TelemetryDashboard';
+import { MegaProjects } from './components/MegaProjects';
 import { projectsData } from './data/projects';
 import type { ProjectData } from './data/projects';
 
@@ -30,7 +31,7 @@ const LinkedinIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'Home' | 'Visuals' | 'ML' | 'AI'>('Home');
+  const [currentPage, setCurrentPage] = useState<'Home' | 'Visuals' | 'ML' | 'AI' | 'MegaProjects'>('Home');
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -55,6 +56,7 @@ export default function App() {
       case 'Visuals': return 'radial-gradient(circle, rgba(16, 185, 129, 0.32) 0%, rgba(16, 185, 129, 0) 70%)';
       case 'ML': return 'radial-gradient(circle, rgba(99, 102, 241, 0.32) 0%, rgba(99, 102, 241, 0) 70%)';
       case 'AI': return 'radial-gradient(circle, rgba(244, 63, 94, 0.32) 0%, rgba(244, 63, 94, 0) 70%)';
+      case 'MegaProjects': return 'radial-gradient(circle, rgba(168, 85, 247, 0.32) 0%, rgba(168, 85, 247, 0) 70%)';
       default: return 'radial-gradient(circle, rgba(168, 85, 247, 0.32) 0%, rgba(168, 85, 247, 0) 70%)';
     }
   };
@@ -406,7 +408,8 @@ export default function App() {
               { key: 'Home', label: 'Overview' },
               { key: 'Visuals', label: 'Data Visuals & Dashboards' },
               { key: 'ML', label: 'Machine Learning' },
-              { key: 'AI', label: 'Deep Learning / AI' }
+              { key: 'AI', label: 'Deep Learning / AI' },
+              { key: 'MegaProjects', label: 'Mega Projects' }
             ] as const).map((tab) => {
               const isActive = currentPage === tab.key;
               return (
@@ -909,6 +912,19 @@ export default function App() {
                       ))}
                   </div>
                 </div>
+              </motion.div>
+            )}
+
+            {/* 5. MEGA PROJECTS PAGE */}
+            {currentPage === 'MegaProjects' && (
+              <motion.div
+                key="megaprojects"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <MegaProjects />
               </motion.div>
             )}
 
